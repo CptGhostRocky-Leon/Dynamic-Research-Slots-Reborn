@@ -62,6 +62,18 @@ initialize_dynamic_research_slots = {
 		add_to_variable = { easy_research_slots = 5 }
 	}
 
+	# Optional: minor nations get an additional Easy Slot (controlled via game rule)
+	if = {
+		limit = {
+			is_major = no
+			has_game_rule = {
+				rule = DR_MINOR_EASY_SLOTS_RULE
+				option = DR_MINOR_EASY_SLOTS_ON
+			}
+		}
+		add_to_variable = { easy_research_slots = 1 }
+	}
+
 	# Kostenfaktor der Easy Slots über Game Rule (Standard 60%)
 	if = {
 		limit = { has_game_rule = { rule = DR_EASY_COST_RULE option = DR_EASY_COST_10 } }

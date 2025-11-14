@@ -93,3 +93,21 @@ DR_EASY_COST_RULE = {
 		desc = "RULE_DR_EASY_COST_100_DESC"
 	}
 }
+
+DR_MINOR_EASY_SLOTS_RULE = {
+	name = "RULE_DR_MINOR_EASY_SLOTS"
+	group = "RULE_GROUP_DYNAMIC_RESEARCH"
+
+	default = {
+		name = DR_MINOR_EASY_SLOTS_OFF
+		text = "RULE_DR_MINOR_EASY_SLOTS_OFF"
+		desc = "RULE_DR_MINOR_EASY_SLOTS_OFF_DESC"
+	}
+
+	option = {
+		name = DR_MINOR_EASY_SLOTS_ON
+		text = "RULE_DR_MINOR_EASY_SLOTS_ON"
+		desc = "RULE_DR_MINOR_EASY_SLOTS_ON_DESC"
+		allow_achievements = no
+	}
+}

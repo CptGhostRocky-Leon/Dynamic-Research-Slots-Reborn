@@ -60,4 +60,11 @@
   RULE_DR_EASY_COST_100:0 "100% of normal cost"
   RULE_DR_EASY_COST_100_DESC:0 "Easy Research Slots require the full Research Power cost of a normal slot (no discount)."
 
+  RULE_DR_MINOR_EASY_SLOTS:0 "Minor Nation Easy Slots"
+  RULE_DR_MINOR_EASY_SLOTS_DESC:0 "Controls whether non-major countries receive an additional Easy Research Slot to help them keep up technologically."
+  RULE_DR_MINOR_EASY_SLOTS_OFF:0 "Disabled"
+  RULE_DR_MINOR_EASY_SLOTS_OFF_DESC:0 "Minor nations use the same Easy Slot baseline as major nations."
+  RULE_DR_MINOR_EASY_SLOTS_ON:0 "Enabled (no achievements)"
+  RULE_DR_MINOR_EASY_SLOTS_ON_DESC:0 "Non-major countries receive one additional Easy Research Slot. This makes the game slightly easier for minors and disables achievements."
+
 

@@ -247,6 +247,33 @@ if = {
 ...
 ```
 
+### Minor vs. Major Nations
+
+The script distinguishes between **major** and **non-major** (minor) countries using the standard `is_major` trigger.
+
+There is an optional helper bonus for minors controlled via the Custom Game Rule `RULE_DR_MINOR_EASY_SLOTS`:
+
+- When **enabled**, every non-major country receives **one additional Easy Research Slot** on top of all other logic.
+- When **disabled** (default), majors and minors share the same Easy Slot baseline.
+- Enabling this rule **disables achievements** (via `allow_achievements = no` on the “ON” option).
+
+Implementation in `initialize_dynamic_research_slots`:
+
+```txt
+if = {
+    limit = {
+        is_major = no
+        has_game_rule = {
+            rule = DR_MINOR_EASY_SLOTS_RULE
+            option = DR_MINOR_EASY_SLOTS_ON
+        }
+    }
+    add_to_variable = { easy_research_slots = 1 }
+}
+```
+
+This bonus is applied after the other Game Rule adjustments, so minors can be globally buffed or kept even with majors depending on the selected option.
+
 ### Game Rule: Easy Slot Cost Factor
 
 The Custom Game Rule `DR_EASY_COST_RULE` controls `easy_research_slot_coefficient`:
