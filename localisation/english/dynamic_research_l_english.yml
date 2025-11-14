@@ -1,4 +1,4 @@
-l_english:
+﻿l_english:
   # Category & decision titles
   dynamic_research_category:0 "Dynamic Research Slots"
   dynamic_research_category_desc:0 "This mod dynamically adjusts the number of research slots available to each country based on their industrial capacity."
@@ -111,5 +111,6 @@ l_english:
   RULE_DR_ALLIANCE_RP_PLUS_25_DESC:0 "Countries that are in a faction gain 25% additional Research Power."
   RULE_DR_ALLIANCE_RP_PLUS_30:0 "+30% RP in faction"
   RULE_DR_ALLIANCE_RP_PLUS_30_DESC:0 "Countries that are in a faction gain 30% additional Research Power."
+
 
 
