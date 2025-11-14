@@ -1,0 +1,78 @@
+on_actions = {
+  ###
+  # Initialisierung beim Spielstart.
+  # Variablen/Fahnen setzen, aber noch keine Slots ändern.
+  ###
+  on_startup = {
+    effect = {
+      every_country = {
+        initialize_dynamic_research_slots = yes
+        calculate_modifiers_to_rp = yes
+      }
+    }
+  }
+
+  ###
+  # Tägliche Aktualisierung.
+  # - Spieler: jeden Tag berechnen, aber Event-Spam über Cooldown steuern.
+  # - KI: alle ~30 Tage, verteilt über 30 Tage.
+  ###
+  on_daily = {
+    effect = {
+      # Falls ein Land später im Spiel entsteht, einmalig initialisieren
+      if = {
+        limit = { NOT = { has_country_flag = dynamic_research_slots_initialized } }
+        initialize_dynamic_research_slots = yes
+        calculate_modifiers_to_rp = yes
+        recalculate_dynamic_research_slots = yes
+      }
+
+      # Spieler-Logik: jeden Tag berechnen
+      if = {
+        limit = { is_ai = no }
+
+        # Event-Cooldown herunterzählen (falls vorhanden)
+        if = {
+          limit = { has_variable = dr_player_event_cooldown }
+          subtract_from_variable = { dr_player_event_cooldown = 1 }
+        }
+
+        calculate_modifiers_to_rp = yes
+        recalculate_dynamic_research_slots = yes
+      }
+
+      # KI-Logik: alle ~30 Tage, verteilt über 30 Tage
+      if = {
+        limit = { is_ai = yes }
+
+        # Zufalls-Offset initialisieren, falls noch nicht gesetzt
+        if = {
+          limit = { NOT = { has_variable = dr_days_until_update } }
+          set_temp_variable_to_random = {
+            var = dr_rand_offset
+            min = 1
+            max = 30
+            integer = yes
+          }
+          set_variable = { dr_days_until_update = var:dr_rand_offset }
+        }
+
+        subtract_from_variable = { dr_days_until_update = 1 }
+
+        if = {
+          limit = {
+            check_variable = {
+              var = dr_days_until_update
+              value = 0
+              compare = less_than_or_equals
+            }
+          }
+          set_variable = { dr_days_until_update = 30 }
+          calculate_modifiers_to_rp = yes
+          recalculate_dynamic_research_slots = yes
+        }
+      }
+    }
+  }
+}
+

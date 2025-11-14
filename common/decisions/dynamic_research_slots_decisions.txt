@@ -1,0 +1,40 @@
+dynamic_research_slots_decisions = {
+
+	dynamic_research_slots_help = {
+		available = {
+			is_ai = no
+		}
+
+		complete_effect = {
+			country_event = dynamic_research_slots.help
+		}
+	}
+
+	initialize_dynamic_research_slots = {
+		visible = {
+			is_debug = yes
+		}
+		available = {
+			not = { has_country_flag = dynamic_research_slots_initialized }
+		}
+
+		complete_effect = {
+			initialize_dynamic_research_slots = yes
+			recalculate_dynamic_research_slots = yes
+		}
+
+	}
+
+	recalculate_dynamic_research_slots = {
+		visible = {
+			is_debug = yes
+		}
+		available = {
+			has_country_flag = dynamic_research_slots_initialized
+		}
+		complete_effect = {
+			recalculate_dynamic_research_slots = yes
+		}
+	}
+}
+

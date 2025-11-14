@@ -1,0 +1,7 @@
+dynamic_research_slots_decisions = {
+	icon = generic_research
+	visible = {
+		always = yes
+	}
+}
+

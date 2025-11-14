@@ -1,0 +1,23 @@
+﻿l_english:
+  # Category & decision titles
+  dynamic_research_category:0 "Dynamic Research Slots"
+  dynamic_research_category_desc:0 "This mod dynamically adjusts the number of research slots available to each country based on their industrial capacity."
+  dynamic_research_display:0 "Research Power Overview"
+
+  # Detailed description used by the info decision
+  dynamic_research_decision_desc:0 "Our factories generate Research Power (RP), which, when it reaches certain thresholds, unlocks more research slots for us to use - but we can also lose them if our RP is not high enough.\n\nÂ§YTotal RP:Â§! [?research_power|Y]\nÂ§O RP from civilian factories:Â§! [?rp_civilian|Y]\nÂ§G RP from military factories:Â§! [?rp_military|Y]\nÂ§C RP from naval dockyards:Â§! [?rp_naval|Y]"
+
+  # Event notification titles, descriptions and option names.
+  dynamic_research_growth_title:0 "The growth of research capacity"
+  dynamic_research_growth_desc:0 "Economic growth will allow to invest more in research."
+  dynamic_research_decline_title:0 "Research capacity decline"
+  dynamic_research_decline_desc:0 "The economic downturn has led to a lack of research funding."
+  dynamic_research_growth_option:0 "Good"
+  dynamic_research_decline_option:0 "Badly"
+
+  # Startup notification localisation
+  dynamic_research_startup_title:0 "Dynamic Research Slots Initialized"
+  dynamic_research_startup_desc:0 "Dynamic Research Power is now active. Your factories will generate Research Power (RP) each day. When RP reaches certain thresholds, additional research slots will unlock automatically; if your RP falls below a threshold, slots may be lost. Keep growing your industrial capacity to maintain or increase your research efficiency."
+  dynamic_research_startup_option:0 "Understood"
+
+
