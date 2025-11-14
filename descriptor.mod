@@ -1,8 +1,9 @@
-version="1.0"
 name="Dynamic Research Slots Reborn"
-supported_version="1.16.*"
-path="dynamic_research_mod"
+version="1.0"
 tags={
-    "Gameplay"
-    "Balance"
+	"Gameplay"
+	"Balance"
 }
+picture="thumbnail.png"
+supported_version="1.16.*"
+remote_file_id="3605777399"
