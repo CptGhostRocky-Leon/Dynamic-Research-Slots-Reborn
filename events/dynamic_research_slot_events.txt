@@ -11,6 +11,10 @@ country_event = {
   option {
     name = dynamic_research_slots.help.a
   }
+  option {
+    name = dynamic_research_slots.help.b
+    country_event = { id = dynamic_research_slots.5 }
+  }
 }
 
 country_event = {
@@ -62,5 +66,18 @@ country_event = {
 
   option {
     name = dynamic_research_slots.4.a
+  }
+}
+
+country_event = {
+  id = dynamic_research_slots.5
+  hidden = no
+  is_triggered_only = yes
+
+  title = dynamic_research_slots.5.title
+  desc = dynamic_research_slots.5.desc
+
+  option {
+    name = dynamic_research_slots.5.a
   }
 }

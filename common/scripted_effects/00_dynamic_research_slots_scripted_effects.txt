@@ -207,39 +207,171 @@ calculate_modifiers_to_rp = {
 			set_variable = { war_rp_base_penalty = 0.30 }
 		}
 
-		# War support factor (0.0-0.4)
-		set_variable = { war_penalty_factor_ws = 0.4 }
-		if = {
-			limit = { war_support > 0.2 }
-			set_variable = { war_penalty_factor_ws = 0.3 }
-		}
-		if = {
-			limit = { war_support > 0.4 }
-			set_variable = { war_penalty_factor_ws = 0.2 }
-		}
-		if = {
-			limit = { war_support > 0.6 }
-			set_variable = { war_penalty_factor_ws = 0.1 }
-		}
-		if = {
-			limit = { war_support > 0.8 }
-			set_variable = { war_penalty_factor_ws = 0.0 }
-		}
+		# War support factor (0.0-0.4), 1%-Schritte von 0% bis 80% War Support
+		set_variable = { war_penalty_factor_ws = 0.40 }
+		if = { limit = { war_support > 0.01 } set_variable = { war_penalty_factor_ws = 0.395 } }
+		if = { limit = { war_support > 0.02 } set_variable = { war_penalty_factor_ws = 0.390 } }
+		if = { limit = { war_support > 0.03 } set_variable = { war_penalty_factor_ws = 0.385 } }
+		if = { limit = { war_support > 0.04 } set_variable = { war_penalty_factor_ws = 0.380 } }
+		if = { limit = { war_support > 0.05 } set_variable = { war_penalty_factor_ws = 0.375 } }
+		if = { limit = { war_support > 0.06 } set_variable = { war_penalty_factor_ws = 0.370 } }
+		if = { limit = { war_support > 0.07 } set_variable = { war_penalty_factor_ws = 0.365 } }
+		if = { limit = { war_support > 0.08 } set_variable = { war_penalty_factor_ws = 0.360 } }
+		if = { limit = { war_support > 0.09 } set_variable = { war_penalty_factor_ws = 0.355 } }
+		if = { limit = { war_support > 0.10 } set_variable = { war_penalty_factor_ws = 0.350 } }
+		if = { limit = { war_support > 0.11 } set_variable = { war_penalty_factor_ws = 0.345 } }
+		if = { limit = { war_support > 0.12 } set_variable = { war_penalty_factor_ws = 0.340 } }
+		if = { limit = { war_support > 0.13 } set_variable = { war_penalty_factor_ws = 0.335 } }
+		if = { limit = { war_support > 0.14 } set_variable = { war_penalty_factor_ws = 0.330 } }
+		if = { limit = { war_support > 0.15 } set_variable = { war_penalty_factor_ws = 0.325 } }
+		if = { limit = { war_support > 0.16 } set_variable = { war_penalty_factor_ws = 0.320 } }
+		if = { limit = { war_support > 0.17 } set_variable = { war_penalty_factor_ws = 0.315 } }
+		if = { limit = { war_support > 0.18 } set_variable = { war_penalty_factor_ws = 0.310 } }
+		if = { limit = { war_support > 0.19 } set_variable = { war_penalty_factor_ws = 0.305 } }
+		if = { limit = { war_support > 0.20 } set_variable = { war_penalty_factor_ws = 0.300 } }
+		if = { limit = { war_support > 0.21 } set_variable = { war_penalty_factor_ws = 0.295 } }
+		if = { limit = { war_support > 0.22 } set_variable = { war_penalty_factor_ws = 0.290 } }
+		if = { limit = { war_support > 0.23 } set_variable = { war_penalty_factor_ws = 0.285 } }
+		if = { limit = { war_support > 0.24 } set_variable = { war_penalty_factor_ws = 0.280 } }
+		if = { limit = { war_support > 0.25 } set_variable = { war_penalty_factor_ws = 0.275 } }
+		if = { limit = { war_support > 0.26 } set_variable = { war_penalty_factor_ws = 0.270 } }
+		if = { limit = { war_support > 0.27 } set_variable = { war_penalty_factor_ws = 0.265 } }
+		if = { limit = { war_support > 0.28 } set_variable = { war_penalty_factor_ws = 0.260 } }
+		if = { limit = { war_support > 0.29 } set_variable = { war_penalty_factor_ws = 0.255 } }
+		if = { limit = { war_support > 0.30 } set_variable = { war_penalty_factor_ws = 0.250 } }
+		if = { limit = { war_support > 0.31 } set_variable = { war_penalty_factor_ws = 0.245 } }
+		if = { limit = { war_support > 0.32 } set_variable = { war_penalty_factor_ws = 0.240 } }
+		if = { limit = { war_support > 0.33 } set_variable = { war_penalty_factor_ws = 0.235 } }
+		if = { limit = { war_support > 0.34 } set_variable = { war_penalty_factor_ws = 0.230 } }
+		if = { limit = { war_support > 0.35 } set_variable = { war_penalty_factor_ws = 0.225 } }
+		if = { limit = { war_support > 0.36 } set_variable = { war_penalty_factor_ws = 0.220 } }
+		if = { limit = { war_support > 0.37 } set_variable = { war_penalty_factor_ws = 0.215 } }
+		if = { limit = { war_support > 0.38 } set_variable = { war_penalty_factor_ws = 0.210 } }
+		if = { limit = { war_support > 0.39 } set_variable = { war_penalty_factor_ws = 0.205 } }
+		if = { limit = { war_support > 0.40 } set_variable = { war_penalty_factor_ws = 0.200 } }
+		if = { limit = { war_support > 0.41 } set_variable = { war_penalty_factor_ws = 0.195 } }
+		if = { limit = { war_support > 0.42 } set_variable = { war_penalty_factor_ws = 0.190 } }
+		if = { limit = { war_support > 0.43 } set_variable = { war_penalty_factor_ws = 0.185 } }
+		if = { limit = { war_support > 0.44 } set_variable = { war_penalty_factor_ws = 0.180 } }
+		if = { limit = { war_support > 0.45 } set_variable = { war_penalty_factor_ws = 0.175 } }
+		if = { limit = { war_support > 0.46 } set_variable = { war_penalty_factor_ws = 0.170 } }
+		if = { limit = { war_support > 0.47 } set_variable = { war_penalty_factor_ws = 0.165 } }
+		if = { limit = { war_support > 0.48 } set_variable = { war_penalty_factor_ws = 0.160 } }
+		if = { limit = { war_support > 0.49 } set_variable = { war_penalty_factor_ws = 0.155 } }
+		if = { limit = { war_support > 0.50 } set_variable = { war_penalty_factor_ws = 0.150 } }
+		if = { limit = { war_support > 0.51 } set_variable = { war_penalty_factor_ws = 0.145 } }
+		if = { limit = { war_support > 0.52 } set_variable = { war_penalty_factor_ws = 0.140 } }
+		if = { limit = { war_support > 0.53 } set_variable = { war_penalty_factor_ws = 0.135 } }
+		if = { limit = { war_support > 0.54 } set_variable = { war_penalty_factor_ws = 0.130 } }
+		if = { limit = { war_support > 0.55 } set_variable = { war_penalty_factor_ws = 0.125 } }
+		if = { limit = { war_support > 0.56 } set_variable = { war_penalty_factor_ws = 0.120 } }
+		if = { limit = { war_support > 0.57 } set_variable = { war_penalty_factor_ws = 0.115 } }
+		if = { limit = { war_support > 0.58 } set_variable = { war_penalty_factor_ws = 0.110 } }
+		if = { limit = { war_support > 0.59 } set_variable = { war_penalty_factor_ws = 0.105 } }
+		if = { limit = { war_support > 0.60 } set_variable = { war_penalty_factor_ws = 0.100 } }
+		if = { limit = { war_support > 0.61 } set_variable = { war_penalty_factor_ws = 0.095 } }
+		if = { limit = { war_support > 0.62 } set_variable = { war_penalty_factor_ws = 0.090 } }
+		if = { limit = { war_support > 0.63 } set_variable = { war_penalty_factor_ws = 0.085 } }
+		if = { limit = { war_support > 0.64 } set_variable = { war_penalty_factor_ws = 0.080 } }
+		if = { limit = { war_support > 0.65 } set_variable = { war_penalty_factor_ws = 0.075 } }
+		if = { limit = { war_support > 0.66 } set_variable = { war_penalty_factor_ws = 0.070 } }
+		if = { limit = { war_support > 0.67 } set_variable = { war_penalty_factor_ws = 0.065 } }
+		if = { limit = { war_support > 0.68 } set_variable = { war_penalty_factor_ws = 0.060 } }
+		if = { limit = { war_support > 0.69 } set_variable = { war_penalty_factor_ws = 0.055 } }
+		if = { limit = { war_support > 0.70 } set_variable = { war_penalty_factor_ws = 0.050 } }
+		if = { limit = { war_support > 0.71 } set_variable = { war_penalty_factor_ws = 0.045 } }
+		if = { limit = { war_support > 0.72 } set_variable = { war_penalty_factor_ws = 0.040 } }
+		if = { limit = { war_support > 0.73 } set_variable = { war_penalty_factor_ws = 0.035 } }
+		if = { limit = { war_support > 0.74 } set_variable = { war_penalty_factor_ws = 0.030 } }
+		if = { limit = { war_support > 0.75 } set_variable = { war_penalty_factor_ws = 0.025 } }
+		if = { limit = { war_support > 0.76 } set_variable = { war_penalty_factor_ws = 0.020 } }
+		if = { limit = { war_support > 0.77 } set_variable = { war_penalty_factor_ws = 0.015 } }
+		if = { limit = { war_support > 0.78 } set_variable = { war_penalty_factor_ws = 0.010 } }
+		if = { limit = { war_support > 0.79 } set_variable = { war_penalty_factor_ws = 0.005 } }
+		if = { limit = { war_support > 0.80 } set_variable = { war_penalty_factor_ws = 0.000 } }
 
-		# Stability factor (0.0-0.3)
-		set_variable = { war_penalty_factor_stab = 0.3 }
-		if = {
-			limit = { stability > 0.4 }
-			set_variable = { war_penalty_factor_stab = 0.2 }
-		}
-		if = {
-			limit = { stability > 0.6 }
-			set_variable = { war_penalty_factor_stab = 0.1 }
-		}
-		if = {
-			limit = { stability > 0.8 }
-			set_variable = { war_penalty_factor_stab = 0.0 }
-		}
+		# Stability factor (0.0-0.3), 1%-Schritte von 0% bis 80% Stabilität
+		set_variable = { war_penalty_factor_stab = 0.30 }
+		if = { limit = { stability > 0.01 } set_variable = { war_penalty_factor_stab = 0.296 } }
+		if = { limit = { stability > 0.02 } set_variable = { war_penalty_factor_stab = 0.292 } }
+		if = { limit = { stability > 0.03 } set_variable = { war_penalty_factor_stab = 0.289 } }
+		if = { limit = { stability > 0.04 } set_variable = { war_penalty_factor_stab = 0.285 } }
+		if = { limit = { stability > 0.05 } set_variable = { war_penalty_factor_stab = 0.281 } }
+		if = { limit = { stability > 0.06 } set_variable = { war_penalty_factor_stab = 0.278 } }
+		if = { limit = { stability > 0.07 } set_variable = { war_penalty_factor_stab = 0.274 } }
+		if = { limit = { stability > 0.08 } set_variable = { war_penalty_factor_stab = 0.270 } }
+		if = { limit = { stability > 0.09 } set_variable = { war_penalty_factor_stab = 0.266 } }
+		if = { limit = { stability > 0.10 } set_variable = { war_penalty_factor_stab = 0.262 } }
+		if = { limit = { stability > 0.11 } set_variable = { war_penalty_factor_stab = 0.259 } }
+		if = { limit = { stability > 0.12 } set_variable = { war_penalty_factor_stab = 0.255 } }
+		if = { limit = { stability > 0.13 } set_variable = { war_penalty_factor_stab = 0.251 } }
+		if = { limit = { stability > 0.14 } set_variable = { war_penalty_factor_stab = 0.247 } }
+		if = { limit = { stability > 0.15 } set_variable = { war_penalty_factor_stab = 0.244 } }
+		if = { limit = { stability > 0.16 } set_variable = { war_penalty_factor_stab = 0.240 } }
+		if = { limit = { stability > 0.17 } set_variable = { war_penalty_factor_stab = 0.236 } }
+		if = { limit = { stability > 0.18 } set_variable = { war_penalty_factor_stab = 0.232 } }
+		if = { limit = { stability > 0.19 } set_variable = { war_penalty_factor_stab = 0.229 } }
+		if = { limit = { stability > 0.20 } set_variable = { war_penalty_factor_stab = 0.225 } }
+		if = { limit = { stability > 0.21 } set_variable = { war_penalty_factor_stab = 0.221 } }
+		if = { limit = { stability > 0.22 } set_variable = { war_penalty_factor_stab = 0.218 } }
+		if = { limit = { stability > 0.23 } set_variable = { war_penalty_factor_stab = 0.214 } }
+		if = { limit = { stability > 0.24 } set_variable = { war_penalty_factor_stab = 0.210 } }
+		if = { limit = { stability > 0.25 } set_variable = { war_penalty_factor_stab = 0.206 } }
+		if = { limit = { stability > 0.26 } set_variable = { war_penalty_factor_stab = 0.202 } }
+		if = { limit = { stability > 0.27 } set_variable = { war_penalty_factor_stab = 0.199 } }
+		if = { limit = { stability > 0.28 } set_variable = { war_penalty_factor_stab = 0.195 } }
+		if = { limit = { stability > 0.29 } set_variable = { war_penalty_factor_stab = 0.191 } }
+		if = { limit = { stability > 0.30 } set_variable = { war_penalty_factor_stab = 0.188 } }
+		if = { limit = { stability > 0.31 } set_variable = { war_penalty_factor_stab = 0.184 } }
+		if = { limit = { stability > 0.32 } set_variable = { war_penalty_factor_stab = 0.180 } }
+		if = { limit = { stability > 0.33 } set_variable = { war_penalty_factor_stab = 0.176 } }
+		if = { limit = { stability > 0.34 } set_variable = { war_penalty_factor_stab = 0.172 } }
+		if = { limit = { stability > 0.35 } set_variable = { war_penalty_factor_stab = 0.169 } }
+		if = { limit = { stability > 0.36 } set_variable = { war_penalty_factor_stab = 0.165 } }
+		if = { limit = { stability > 0.37 } set_variable = { war_penalty_factor_stab = 0.161 } }
+		if = { limit = { stability > 0.38 } set_variable = { war_penalty_factor_stab = 0.158 } }
+		if = { limit = { stability > 0.39 } set_variable = { war_penalty_factor_stab = 0.154 } }
+		if = { limit = { stability > 0.40 } set_variable = { war_penalty_factor_stab = 0.150 } }
+		if = { limit = { stability > 0.41 } set_variable = { war_penalty_factor_stab = 0.146 } }
+		if = { limit = { stability > 0.42 } set_variable = { war_penalty_factor_stab = 0.142 } }
+		if = { limit = { stability > 0.43 } set_variable = { war_penalty_factor_stab = 0.139 } }
+		if = { limit = { stability > 0.44 } set_variable = { war_penalty_factor_stab = 0.135 } }
+		if = { limit = { stability > 0.45 } set_variable = { war_penalty_factor_stab = 0.131 } }
+		if = { limit = { stability > 0.46 } set_variable = { war_penalty_factor_stab = 0.128 } }
+		if = { limit = { stability > 0.47 } set_variable = { war_penalty_factor_stab = 0.124 } }
+		if = { limit = { stability > 0.48 } set_variable = { war_penalty_factor_stab = 0.120 } }
+		if = { limit = { stability > 0.49 } set_variable = { war_penalty_factor_stab = 0.116 } }
+		if = { limit = { stability > 0.50 } set_variable = { war_penalty_factor_stab = 0.112 } }
+		if = { limit = { stability > 0.51 } set_variable = { war_penalty_factor_stab = 0.109 } }
+		if = { limit = { stability > 0.52 } set_variable = { war_penalty_factor_stab = 0.105 } }
+		if = { limit = { stability > 0.53 } set_variable = { war_penalty_factor_stab = 0.101 } }
+		if = { limit = { stability > 0.54 } set_variable = { war_penalty_factor_stab = 0.097 } }
+		if = { limit = { stability > 0.55 } set_variable = { war_penalty_factor_stab = 0.094 } }
+		if = { limit = { stability > 0.56 } set_variable = { war_penalty_factor_stab = 0.090 } }
+		if = { limit = { stability > 0.57 } set_variable = { war_penalty_factor_stab = 0.086 } }
+		if = { limit = { stability > 0.58 } set_variable = { war_penalty_factor_stab = 0.082 } }
+		if = { limit = { stability > 0.59 } set_variable = { war_penalty_factor_stab = 0.079 } }
+		if = { limit = { stability > 0.60 } set_variable = { war_penalty_factor_stab = 0.075 } }
+		if = { limit = { stability > 0.61 } set_variable = { war_penalty_factor_stab = 0.071 } }
+		if = { limit = { stability > 0.62 } set_variable = { war_penalty_factor_stab = 0.067 } }
+		if = { limit = { stability > 0.63 } set_variable = { war_penalty_factor_stab = 0.064 } }
+		if = { limit = { stability > 0.64 } set_variable = { war_penalty_factor_stab = 0.060 } }
+		if = { limit = { stability > 0.65 } set_variable = { war_penalty_factor_stab = 0.056 } }
+		if = { limit = { stability > 0.66 } set_variable = { war_penalty_factor_stab = 0.053 } }
+		if = { limit = { stability > 0.67 } set_variable = { war_penalty_factor_stab = 0.049 } }
+		if = { limit = { stability > 0.68 } set_variable = { war_penalty_factor_stab = 0.045 } }
+		if = { limit = { stability > 0.69 } set_variable = { war_penalty_factor_stab = 0.041 } }
+		if = { limit = { stability > 0.70 } set_variable = { war_penalty_factor_stab = 0.038 } }
+		if = { limit = { stability > 0.71 } set_variable = { war_penalty_factor_stab = 0.034 } }
+		if = { limit = { stability > 0.72 } set_variable = { war_penalty_factor_stab = 0.030 } }
+		if = { limit = { stability > 0.73 } set_variable = { war_penalty_factor_stab = 0.026 } }
+		if = { limit = { stability > 0.74 } set_variable = { war_penalty_factor_stab = 0.022 } }
+		if = { limit = { stability > 0.75 } set_variable = { war_penalty_factor_stab = 0.019 } }
+		if = { limit = { stability > 0.76 } set_variable = { war_penalty_factor_stab = 0.015 } }
+		if = { limit = { stability > 0.77 } set_variable = { war_penalty_factor_stab = 0.011 } }
+		if = { limit = { stability > 0.78 } set_variable = { war_penalty_factor_stab = 0.008 } }
+		if = { limit = { stability > 0.79 } set_variable = { war_penalty_factor_stab = 0.004 } }
+		if = { limit = { stability > 0.80 } set_variable = { war_penalty_factor_stab = 0.000 } }
 
 		# Ruling party factor (0.0-0.3), based on ruling ideology popularity.
 		set_variable = { war_penalty_factor_party = 0.3 }
