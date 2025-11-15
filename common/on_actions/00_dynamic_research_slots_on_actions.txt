@@ -1,7 +1,7 @@
 on_actions = {
   ###
-  # Initialisierung beim Spielstart.
-  # Variablen/Fahnen setzen, aber noch keine Slots ändern.
+  # Initialization at game start.
+  # Set variables/flags but do not change slots yet.
   ###
   on_startup = {
     effect = {
@@ -13,13 +13,23 @@ on_actions = {
   }
 
   ###
-  # Tägliche Aktualisierung.
-  # - Spieler: jeden Tag berechnen, aber Event-Spam über Cooldown steuern.
-  # - KI: alle ~30 Tage, verteilt über 30 Tage.
+  # Daily update.
+  # - Player: recalculate every day, with event cooldown.
+  # - AI: roughly every 30 days, staggered across countries.
   ###
   on_daily = {
     effect = {
-      # Falls ein Land später im Spiel entsteht, einmalig initialisieren
+      # Track war duration for dynamic war-time RP penalties.
+      if = {
+        limit = { has_war = yes }
+        add_to_variable = { dr_days_in_war = 1 }
+      }
+      if = {
+        limit = { has_war = no }
+        set_variable = { dr_days_in_war = 0 }
+      }
+
+      # If a country is created later in the game, initialize it once.
       if = {
         limit = { NOT = { has_country_flag = dynamic_research_slots_initialized } }
         initialize_dynamic_research_slots = yes
@@ -27,11 +37,11 @@ on_actions = {
         recalculate_dynamic_research_slots = yes
       }
 
-      # Spieler-Logik: jeden Tag berechnen
+      # Player logic: recalculate every day.
       if = {
         limit = { is_ai = no }
 
-        # Event-Cooldown herunterzählen (falls vorhanden)
+        # Decrease event cooldown (if present).
         if = {
           limit = { has_variable = dr_player_event_cooldown }
           subtract_from_variable = { dr_player_event_cooldown = 1 }
@@ -41,11 +51,11 @@ on_actions = {
         recalculate_dynamic_research_slots = yes
       }
 
-      # KI-Logik: alle ~30 Tage, verteilt über 30 Tage
+      # AI logic: recalculate roughly every 30 days, staggered.
       if = {
         limit = { is_ai = yes }
 
-        # Zufalls-Offset initialisieren, falls noch nicht gesetzt
+        # Initialize random offset if not yet set.
         if = {
           limit = { NOT = { has_variable = dr_days_until_update } }
           set_temp_variable_to_random = {
@@ -75,4 +85,3 @@ on_actions = {
     }
   }
 }
-

@@ -1,4 +1,4 @@
-# Dynamic Research Slots Reborn – Technical Overview
+﻿# Dynamic Research Slots Reborn â€“ Technical Overview
 
 This document describes how the *Dynamic Research Slots Reborn* mod works internally and how to extend or integrate it.
 
@@ -10,7 +10,7 @@ The mod is based on the original Workshop mod (ID `2782571928`) but has been upd
 
 - Original concept and implementation by **Lemur**  
   Steam profile: <https://steamcommunity.com/id/crouchinglemur>
-- This version (“Reborn”) updates the mod for newer HOI4 versions, adds performance improvements, Experimental Facility integration and Custom Game Rules while keeping the original design philosophy.
+- This version (â€œRebornâ€) updates the mod for newer HOI4 versions, adds performance improvements, Experimental Facility integration and Custom Game Rules while keeping the original design philosophy.
 
 ---
 
@@ -104,17 +104,46 @@ Per recalculation:
 - `naval_research_power`  
   = `research_power_per_nav * num_of_naval_factories` (with modifier)
 
-Modifiers:
+### Modifiers and Dynamic RP
 
-- `civilian_rp_modifier`, `military_rp_modifier`, `naval_rp_modifier`  
-  are reserved for future extensions; currently all default to `0` and are multiplied into the base values via:
+`calculate_modifiers_to_rp` (in `00_dynamic_research_slots_scripted_effects.txt`) computes a global `total_rp_modifier` that is later applied to `total_research_power`. It combines several systems:
 
-```txt
-set_variable = { temp = 1 }
-add_to_variable = { temp = civilian_rp_modifier }
-set_variable = { civilian_research_power = base_civilian_research_power }
-multiply_variable = { civilian_research_power = temp }
-```
+- **War-time penalty (configurable via game rule `DR_WAR_RP_RULE`)**
+  - Game rule defines a *maximum* penalty (e.g. -5%, -10%, ..., -30%).
+  - Actual penalty depends on:
+    - War Support (low support => higher penalty share).
+    - Stability (low stability => higher penalty share).
+    - Ruling party popularity (weak ruling party => higher penalty share).
+  - Additional scaling:
+    - Offensive war: ramp up over ~3 months (0 â†’ 33% â†’ 66% â†’ 100% of the penalty).
+    - Pure defensive war: ramp up over ~6 months and is further halved.
+  - Result is a `war_rp_penalty_effective` that is subtracted from `total_rp_modifier`.
+
+- **Peacetime bonus**
+  - Only when `has_war = no`.
+  - High Stability + strong ruling party support can grant up to **+5%** RP.
+
+- **Trade / Economy / Conscription laws**
+  - Trade laws: small global RP tweaks (e.g. `free_trade` = +2%, `closed_economy` = -1%).
+  - Economy laws: small global tweaks based on civilian vs. war economy.
+  - Conscription laws: penalties from `extensive_conscription` upwards (up to -10% for `scraping_the_barrel`).
+
+- **Alliance bonus (`DR_ALLIANCE_RP_RULE`)**
+  - For countries in a faction, each ally can contribute up to **5%** of its RP.
+  - Contribution per ally is scaled by opinion in **10 steps from 0 to 80** (0 = 0%, 80+ = 100% of the 5% share).
+  - The total alliance bonus is capped by the selected game rule option (e.g. +5%, +10%, ..., +30%).  
+#### Alliance Bonus – Example
+
+Consider a country with 100 RP and two allies:
+
+- Ally A: 150 RP, 85 opinion → full 5% share = 7.5 effective RP.
+- Ally B: 80 RP, 40 opinion → mid-tier relation factor (e.g. ~0.5 of the 5% share) = 2.0 effective RP.
+
+Raw ally contribution is 9.5 RP, i.e. +9.5% relative to own RP. If the game rule cap is set to **+10%**, the country gets almost the full 10% bonus; if it is set to **+5%**, the bonus is clamped at +5% regardless of how many allies contribute.
+
+
+- **Scientists and Experimental Facilities**
+  - Scientist levels contribute small percentage modifiers to factory-based RP and to Experimental Facility RP, using `civilian_rp_modifier`, `military_rp_modifier`, `naval_rp_modifier` and dedicated scientist level variables.
 
 ### Experimental Facilities
 
@@ -234,8 +263,8 @@ The Custom Game Rule `DR_EASY_SLOTS_RULE` (group `RULE_GROUP_DYNAMIC_RESEARCH`) 
 Defined in `common/game_rules/00_dr_dynamic_research_rules.txt`:
 
 - Options:
-  - `DR_EASY_SLOTS_DEFAULT` (default – original behaviour)
-  - `DR_EASY_SLOTS_PLUS_1` … `DR_EASY_SLOTS_PLUS_5` (+1 … +5 extra Easy Slots)
+  - `DR_EASY_SLOTS_DEFAULT` (default â€“ original behaviour)
+  - `DR_EASY_SLOTS_PLUS_1` â€¦ `DR_EASY_SLOTS_PLUS_5` (+1 â€¦ +5 extra Easy Slots)
 
 Hook in the script:
 
@@ -255,7 +284,7 @@ There is an optional helper bonus for minors controlled via the Custom Game Rule
 
 - When **enabled**, every non-major country receives **one additional Easy Research Slot** on top of all other logic.
 - When **disabled** (default), majors and minors share the same Easy Slot baseline.
-- Enabling this rule **disables achievements** (via `allow_achievements = no` on the “ON” option).
+- Enabling this rule **disables achievements** (via `allow_achievements = no` on the â€œONâ€ option).
 
 Implementation in `initialize_dynamic_research_slots`:
 
@@ -278,10 +307,10 @@ This bonus is applied after the other Game Rule adjustments, so minors can be gl
 
 The Game Rule `RULE_DR_FACTORY_WEIGHTS` allows changing the relative strength of Civ/Mil/Naval factories:
 
-- `Balanced (3 / 2 / 2)` – **default**: `research_power_per_civ = 3`, `research_power_per_mil = 2`, `research_power_per_nav = 2`.
-- `Industry-focused (4 / 2 / 1)` – Civs are strongest, naval weakest.
-- `Military-focused (2 / 4 / 2)` – Mils are strongest, Civs/Naval support them.
-- `Naval-focused (2 / 2 / 4)` – Naval dockyards are strongest.
+- `Balanced (3 / 2 / 2)` â€“ **default**: `research_power_per_civ = 3`, `research_power_per_mil = 2`, `research_power_per_nav = 2`.
+- `Industry-focused (4 / 2 / 1)` â€“ Civs are strongest, naval weakest.
+- `Military-focused (2 / 4 / 2)` â€“ Mils are strongest, Civs/Naval support them.
+- `Naval-focused (2 / 2 / 4)` â€“ Naval dockyards are strongest.
 
 Implementation in `initialize_dynamic_research_slots`:
 
@@ -325,9 +354,9 @@ Non-default options disable achievements.
 
 `RULE_DR_ALLIANCE_RP`:
 
-- `OFF` (**default**) – no bonus.
-- `+10% RP in faction` – `total_rp_modifier += 0.1` if `is_in_faction = yes`.
-- `+20% RP in faction` – `total_rp_modifier += 0.2`.
+- `OFF` (**default**) â€“ no bonus.
+- `+10% RP in faction` â€“ `total_rp_modifier += 0.1` if `is_in_faction = yes`.
+- `+20% RP in faction` â€“ `total_rp_modifier += 0.2`.
 
 Also disables achievements when enabled. Both rules are additive: a country at war and in a faction can get combined modifiers.
 
@@ -335,8 +364,8 @@ Also disables achievements when enabled. Both rules are additive: a country at w
 
 Slot changes are now split into:
 
-- `dynamic_research_slots.1` – generic change (used for gains).
-- `dynamic_research_slots.3` – explicit **slot loss** event.
+- `dynamic_research_slots.1` â€“ generic change (used for gains).
+- `dynamic_research_slots.3` â€“ explicit **slot loss** event.
 
 In `recalculate_dynamic_research_slots` the direction of change is detected and the appropriate event is triggered (respecting the player event cooldown).
 
@@ -396,7 +425,7 @@ on_startup = {
 At game start:
 
 - All countries get their variables and arrays initialized.
-- No slots are changed yet – avoids weird jumps on day 0.
+- No slots are changed yet â€“ avoids weird jumps on day 0.
 
 ### Daily
 
@@ -470,9 +499,9 @@ Summary:
 Events are defined in `events/dynamic_research_slot_events.txt`:
 
 - Namespace: `add_namespace = dynamic_research_slots`
-- `country_event = dynamic_research_slots.help` – HELP popup (manual decision).
-- `country_event = dynamic_research_slots.1` – slot count changed.
-- `country_event = dynamic_research_slots.2` – Easy Slot count changed.
+- `country_event = dynamic_research_slots.help` â€“ HELP popup (manual decision).
+- `country_event = dynamic_research_slots.1` â€“ slot count changed.
+- `country_event = dynamic_research_slots.2` â€“ Easy Slot count changed.
 
 ### Slot-Change Event Cooldown
 

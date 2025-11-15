@@ -144,46 +144,55 @@ DR_WAR_RP_RULE = {
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
 
 	default = {
+		# Default: moderate dynamic war-time penalty
+		name = DR_WAR_RP_MINUS_10
+		text = "RULE_DR_WAR_RP_MINUS_10"
+		desc = "RULE_DR_WAR_RP_MINUS_10_DESC"
+		allow_achievements = yes
+	}
+
+	option = {
 		name = DR_WAR_RP_OFF
 		text = "RULE_DR_WAR_RP_OFF"
 		desc = "RULE_DR_WAR_RP_OFF_DESC"
+		allow_achievements = yes
 	}
 
 	option = {
 		name = DR_WAR_RP_MINUS_5
 		text = "RULE_DR_WAR_RP_MINUS_5"
 		desc = "RULE_DR_WAR_RP_MINUS_5_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_WAR_RP_MINUS_10
 		text = "RULE_DR_WAR_RP_MINUS_10"
 		desc = "RULE_DR_WAR_RP_MINUS_10_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_WAR_RP_MINUS_15
 		text = "RULE_DR_WAR_RP_MINUS_15"
 		desc = "RULE_DR_WAR_RP_MINUS_15_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_WAR_RP_MINUS_20
 		text = "RULE_DR_WAR_RP_MINUS_20"
 		desc = "RULE_DR_WAR_RP_MINUS_20_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_WAR_RP_MINUS_25
 		text = "RULE_DR_WAR_RP_MINUS_25"
 		desc = "RULE_DR_WAR_RP_MINUS_25_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_WAR_RP_MINUS_30
 		text = "RULE_DR_WAR_RP_MINUS_30"
 		desc = "RULE_DR_WAR_RP_MINUS_30_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 }
 
@@ -192,45 +201,54 @@ DR_ALLIANCE_RP_RULE = {
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
 
 	default = {
+		# Default: moderate maximum alliance bonus
+		name = DR_ALLIANCE_RP_PLUS_10
+		text = "RULE_DR_ALLIANCE_RP_PLUS_10"
+		desc = "RULE_DR_ALLIANCE_RP_PLUS_10_DESC"
+		allow_achievements = yes
+	}
+
+	option = {
 		name = DR_ALLIANCE_RP_OFF
 		text = "RULE_DR_ALLIANCE_RP_OFF"
 		desc = "RULE_DR_ALLIANCE_RP_OFF_DESC"
+		allow_achievements = yes
 	}
 
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_5
 		text = "RULE_DR_ALLIANCE_RP_PLUS_5"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_5_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_10
 		text = "RULE_DR_ALLIANCE_RP_PLUS_10"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_10_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_15
 		text = "RULE_DR_ALLIANCE_RP_PLUS_15"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_15_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_20
 		text = "RULE_DR_ALLIANCE_RP_PLUS_20"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_20_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_25
 		text = "RULE_DR_ALLIANCE_RP_PLUS_25"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_25_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 	option = {
 		name = DR_ALLIANCE_RP_PLUS_30
 		text = "RULE_DR_ALLIANCE_RP_PLUS_30"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_30_DESC"
-		allow_achievements = no
+		allow_achievements = yes
 	}
 }
