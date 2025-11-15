@@ -79,12 +79,12 @@
 
   RULE_DR_WAR_RP:0 "War-time Research Power"
   RULE_DR_WAR_RP_DESC:0 "Sets the maximum Research Power penalty while at war. The effective penalty scales with War Support, Stability, ruling party popularity, war duration and whether wars are offensive or defensive. "
-  RULE_DR_WAR_RP_OFF:0 "No change (default)"
+  RULE_DR_WAR_RP_OFF:0 "No change"
   RULE_DR_WAR_RP_OFF_DESC:0 "War does not affect Research Power."
   RULE_DR_WAR_RP_MINUS_5:0 "Max -5% RP in war"
   RULE_DR_WAR_RP_MINUS_5_DESC:0 "Sets the maximum wartime penalty to -5% Research Power. The effective penalty is usually smaller and scales with internal conditions (War Support, Stability, ruling party, war duration, offensive/defensive wars)."
-  RULE_DR_WAR_RP_MINUS_10:0 "Max -10% RP in war"
-  RULE_DR_WAR_RP_MINUS_10_DESC:0 "Sets the maximum wartime penalty to -10% Research Power. The effective penalty is usually smaller and scales with internal conditions (War Support, Stability, ruling party, war duration, offensive/defensive wars)."
+  RULE_DR_WAR_RP_MINUS_10:0 "Max -10% RP in war (default)"
+  RULE_DR_WAR_RP_MINUS_10_DESC:0 "Sets the maximum wartime penalty to -10% Research Power (default). The effective penalty is usually smaller and scales with internal conditions (War Support, Stability, ruling party, war duration, offensive/defensive wars)."
   RULE_DR_WAR_RP_MINUS_15:0 "Max -15% RP in war"
   RULE_DR_WAR_RP_MINUS_15_DESC:0 "Sets the maximum wartime penalty to -15% Research Power. The effective penalty is usually smaller and scales with internal conditions (War Support, Stability, ruling party, war duration, offensive/defensive wars)."
   RULE_DR_WAR_RP_MINUS_20:0 "Max -20% RP in war"
@@ -96,12 +96,12 @@
 
   RULE_DR_ALLIANCE_RP:0 "Alliance Research Power"
   RULE_DR_ALLIANCE_RP_DESC:0 "Sets the maximum Research Power bonus from faction members. Each ally can contribute up to 5% of its RP, scaled by relations, but the total alliance bonus is capped by this rule. "
-  RULE_DR_ALLIANCE_RP_OFF:0 "No bonus (default)"
+  RULE_DR_ALLIANCE_RP_OFF:0 "No bonus"
   RULE_DR_ALLIANCE_RP_OFF_DESC:0 "Being in a faction does not grant any alliance Research Power bonus."
   RULE_DR_ALLIANCE_RP_PLUS_5:0 "Max +5% RP from allies"
   RULE_DR_ALLIANCE_RP_PLUS_5_DESC:0 "Alliance bonuses can provide up to +5% Research Power from faction members (each ally up to 5% of its RP, scaled by relations, capped at +5% total)."
-  RULE_DR_ALLIANCE_RP_PLUS_10:0 "Max +10% RP from allies"
-  RULE_DR_ALLIANCE_RP_PLUS_10_DESC:0 "Alliance bonuses can provide up to +10% Research Power from faction members (each ally up to 5% of its RP, scaled by relations, capped at +10% total)."
+  RULE_DR_ALLIANCE_RP_PLUS_10:0 "Max +10% RP from allies (default)"
+  RULE_DR_ALLIANCE_RP_PLUS_10_DESC:0 "Alliance bonuses can provide up to +10% Research Power from faction members (default). Each ally can contribute up to 5% of its RP, scaled by relations, capped at +10% total."
   RULE_DR_ALLIANCE_RP_PLUS_15:0 "Max +15% RP from allies"
   RULE_DR_ALLIANCE_RP_PLUS_15_DESC:0 "Alliance bonuses can provide up to +15% Research Power from faction members (each ally up to 5% of its RP, scaled by relations, capped at +15% total)."
   RULE_DR_ALLIANCE_RP_PLUS_20:0 "Max +20% RP from allies"
@@ -111,5 +111,11 @@
   RULE_DR_ALLIANCE_RP_PLUS_30:0 "Max +30% RP from allies"
   RULE_DR_ALLIANCE_RP_PLUS_30_DESC:0 "Alliance bonuses can provide up to +30% Research Power from faction members (each ally up to 5% of its RP, scaled by relations, capped at +30% total)."
 
+  RULE_DR_LAW_RP:0 "Law-based Research Power Modifiers"
+  RULE_DR_LAW_RP_DESC:0 "Controls whether trade, economy and conscription laws modify Research Power (RP). When disabled, law changes no longer affect RP – only factories, facilities, war-time and alliance rules apply."
+  RULE_DR_LAW_RP_ON:0 "Enabled (default)"
+  RULE_DR_LAW_RP_ON_DESC:0 "Keep all existing Research Power modifiers from trade laws (e.g. Free Trade), economy laws (e.g. Civilian Economy, War Economy) and conscription laws (e.g. Extensive Conscription)."
+  RULE_DR_LAW_RP_OFF:0 "Disabled"
+  RULE_DR_LAW_RP_OFF_DESC:0 "Ignore all Research Power modifiers from trade, economy and conscription laws. This makes RP depend only on factories, facilities and other Dynamic Research rules."
 
 

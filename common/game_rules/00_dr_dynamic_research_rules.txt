@@ -165,12 +165,6 @@ DR_WAR_RP_RULE = {
 		allow_achievements = yes
 	}
 	option = {
-		name = DR_WAR_RP_MINUS_10
-		text = "RULE_DR_WAR_RP_MINUS_10"
-		desc = "RULE_DR_WAR_RP_MINUS_10_DESC"
-		allow_achievements = yes
-	}
-	option = {
 		name = DR_WAR_RP_MINUS_15
 		text = "RULE_DR_WAR_RP_MINUS_15"
 		desc = "RULE_DR_WAR_RP_MINUS_15_DESC"
@@ -222,12 +216,6 @@ DR_ALLIANCE_RP_RULE = {
 		allow_achievements = yes
 	}
 	option = {
-		name = DR_ALLIANCE_RP_PLUS_10
-		text = "RULE_DR_ALLIANCE_RP_PLUS_10"
-		desc = "RULE_DR_ALLIANCE_RP_PLUS_10_DESC"
-		allow_achievements = yes
-	}
-	option = {
 		name = DR_ALLIANCE_RP_PLUS_15
 		text = "RULE_DR_ALLIANCE_RP_PLUS_15"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_15_DESC"
@@ -249,6 +237,27 @@ DR_ALLIANCE_RP_RULE = {
 		name = DR_ALLIANCE_RP_PLUS_30
 		text = "RULE_DR_ALLIANCE_RP_PLUS_30"
 		desc = "RULE_DR_ALLIANCE_RP_PLUS_30_DESC"
+		allow_achievements = yes
+	}
+}
+
+DR_LAW_RP_RULE = {
+	name = "RULE_DR_LAW_RP"
+	group = "RULE_GROUP_DYNAMIC_RESEARCH"
+
+	# Default: law-based RP modifiers are active
+	default = {
+		name = DR_LAW_RP_ON
+		text = "RULE_DR_LAW_RP_ON"
+		desc = "RULE_DR_LAW_RP_ON_DESC"
+		allow_achievements = yes
+	}
+
+	# Optional: disable RP modifiers from trade / economy / conscription laws
+	option = {
+		name = DR_LAW_RP_OFF
+		text = "RULE_DR_LAW_RP_OFF"
+		desc = "RULE_DR_LAW_RP_OFF_DESC"
 		allow_achievements = yes
 	}
 }
