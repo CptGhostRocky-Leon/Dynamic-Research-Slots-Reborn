@@ -1,0 +1,48 @@
+scripted_localisation = {
+
+	GetDRWarRuleNote = {
+		text = {
+			trigger = {
+				has_game_rule = {
+					rule = DR_WAR_RP_RULE
+					option = DR_WAR_RP_OFF
+				}
+			}
+			localisation_key = DR_WAR_RULE_NOTE_OFF
+		}
+		text = {
+			localisation_key = DR_EMPTY_LOC
+		}
+	}
+
+	GetDRLawRuleNote = {
+		text = {
+			trigger = {
+				has_game_rule = {
+					rule = DR_LAW_RP_RULE
+					option = DR_LAW_RP_OFF
+				}
+			}
+			localisation_key = DR_LAW_RULE_NOTE_OFF
+		}
+		text = {
+			localisation_key = DR_EMPTY_LOC
+		}
+	}
+
+	GetDRAllianceRuleNote = {
+		text = {
+			trigger = {
+				has_game_rule = {
+					rule = DR_ALLIANCE_RP_RULE
+					option = DR_ALLIANCE_RP_OFF
+				}
+			}
+			localisation_key = DR_ALLIANCE_RULE_NOTE_OFF
+		}
+		text = {
+			localisation_key = DR_EMPTY_LOC
+		}
+	}
+}
+
