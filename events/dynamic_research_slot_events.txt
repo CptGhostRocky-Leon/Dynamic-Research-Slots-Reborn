@@ -8,10 +8,10 @@ country_event = {
   title = dynamic_research_slots.help.title
   desc = dynamic_research_slots.help.desc
 
-  option {
+  option = {
     name = dynamic_research_slots.help.a
   }
-  option {
+  option = {
     name = dynamic_research_slots.help.b
     country_event = { id = dynamic_research_slots.5 }
   }
@@ -25,7 +25,7 @@ country_event = {
   title = dynamic_research_slots.1.title
   desc = dynamic_research_slots.1.desc
 
-  option {
+  option = {
     name = dynamic_research_slots.1.a
   }
 }
@@ -38,7 +38,7 @@ country_event = {
   title = dynamic_research_slots.2.title
   desc = dynamic_research_slots.2.desc
 
-  option {
+  option = {
     name = dynamic_research_slots.2.a
   }
 }
@@ -51,7 +51,7 @@ country_event = {
   title = dynamic_research_slots.4.title
   desc = dynamic_research_slots.4.desc
 
-  option {
+  option = {
     name = dynamic_research_slots.4.a
   }
 }
@@ -64,7 +64,7 @@ country_event = {
   title = dynamic_research_slots.5.title
   desc = dynamic_research_slots.5.desc
 
-  option {
+  option = {
     name = dynamic_research_slots.5.a
   }
 }
@@ -77,7 +77,7 @@ country_event = {
   title = dynamic_research_startup_title
   desc = dynamic_research_startup_desc
 
-  option {
+  option = {
     name = dynamic_research_startup_option
   }
 }

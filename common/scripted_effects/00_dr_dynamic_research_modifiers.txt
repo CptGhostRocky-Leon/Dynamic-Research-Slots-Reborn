@@ -673,4 +673,3 @@ dr_apply_alliance_rp_logic = {
 		add_to_variable = { total_rp_modifier = alliance_bonus_pct }
 	}
 }
-

@@ -1,19 +1,4 @@
 ﻿l_english:
-  # Category & decision titles
-  dynamic_research_category:0 "Dynamic Research Slots"
-  dynamic_research_category_desc:0 "This mod dynamically adjusts the number of research slots available to each country based on their industrial capacity."
-  dynamic_research_display:0 "Research Power Overview"
-
-  dynamic_research_decision_desc:0 "Our factories generate Research Power (RP), which, when it reaches certain thresholds, unlocks more research slots for us to use - but we can also lose them if our RP is not high enough.\n\n§WTotal RP:§! [?research_power|Y]\n§ORP from civilian factories:§! [?rp_civilian|Y]\n§GRP from military factories:§! [?rp_military|Y]\n§CRP from naval dockyards:§! [?rp_naval|Y]"
-
-  # Event notification titles, descriptions and option names.
-  dynamic_research_growth_title:0 "The growth of research capacity"
-  dynamic_research_growth_desc:0 "Economic growth will allow to invest more in research."
-  dynamic_research_decline_title:0 "Research capacity decline"
-  dynamic_research_decline_desc:0 "The economic downturn has led to a lack of research funding."
-  dynamic_research_growth_option:0 "Good"
-  dynamic_research_decline_option:0 "Badly"
-
   # Startup notification localisation
   dynamic_research_startup_title:0 "Dynamic Research Slots Initialized"
   dynamic_research_startup_desc:0 "Dynamic Research Power is now active. Your factories will generate Research Power (RP) each day. When RP reaches certain thresholds, additional research slots will unlock automatically; if your RP falls below a threshold, slots may be lost. Keep growing your industrial capacity to maintain or increase your research efficiency. Existing research slots above 2 are treated as Easy Research Slots with reduced RP thresholds instead of being permanently lost."
@@ -21,6 +6,7 @@
 
   # Custom game rules
   RULE_GROUP_DYNAMIC_RESEARCH:0 "Dynamic Research"
+
   RULE_DR_EASY_SLOTS:0 "Easy Research Slots (Base)"
   RULE_DR_EASY_SLOTS_DESC:0 "Controls how many additional Easy Research Slots each country starts with on top of the default behaviour. Easy slots are cheaper to maintain and require less Research Power to unlock."
   RULE_DR_EASY_SLOTS_DEFAULT:0 "Default"
@@ -30,11 +16,11 @@
   RULE_DR_EASY_SLOTS_PLUS_2:0 "+2 Easy Slots"
   RULE_DR_EASY_SLOTS_PLUS_2_DESC:0 "Each country starts with two extra Easy Research Slots."
   RULE_DR_EASY_SLOTS_PLUS_3:0 "+3 Easy Slots"
-  RULE_DR_EASY_SLOTS_PLUS_3_DESC:0 "Each country starts with three extra Easy Research Slots."
+  RULE_DR_EASY_SLOTS_PLUS_3_DESC:0 "Each country starts with three extra Easy Slots."
   RULE_DR_EASY_SLOTS_PLUS_4:0 "+4 Easy Slots"
-  RULE_DR_EASY_SLOTS_PLUS_4_DESC:0 "Each country starts with four extra Easy Research Slots."
+  RULE_DR_EASY_SLOTS_PLUS_4_DESC:0 "Each country starts with four extra Easy Slots."
   RULE_DR_EASY_SLOTS_PLUS_5:0 "+5 Easy Slots"
-  RULE_DR_EASY_SLOTS_PLUS_5_DESC:0 "Each country starts with five extra Easy Research Slots."
+  RULE_DR_EASY_SLOTS_PLUS_5_DESC:0 "Each country starts with five extra Easy Slots."
 
   RULE_DR_EASY_COST:0 "Easy Slot RP Cost Factor"
   RULE_DR_EASY_COST_DESC:0 "Controls how much Research Power Easy Slots require compared to normal slots. Lower values mean easier (cheaper) slots."
@@ -78,7 +64,7 @@
   RULE_DR_FACTORY_WEIGHTS_NAVAL_DESC:0 "Naval dockyards generate 4 RP each, civilian and military factories 2 RP each."
 
   RULE_DR_WAR_RP:0 "War-time Research Power"
-  RULE_DR_WAR_RP_DESC:0 "Sets the maximum Research Power penalty while at war. The effective penalty scales with War Support, Stability, ruling party popularity, war duration and whether wars are offensive or defensive. "
+  RULE_DR_WAR_RP_DESC:0 "Sets the maximum Research Power penalty while at war. The effective penalty scales with War Support, Stability, ruling party popularity, war duration and whether wars are offensive or defensive."
   RULE_DR_WAR_RP_OFF:0 "No change"
   RULE_DR_WAR_RP_OFF_DESC:0 "War does not affect Research Power."
   RULE_DR_WAR_RP_MINUS_5:0 "Max -5% RP in war"
@@ -95,7 +81,7 @@
   RULE_DR_WAR_RP_MINUS_30_DESC:0 "Sets the maximum wartime penalty to -30% Research Power. The effective penalty is usually smaller and scales with internal conditions (War Support, Stability, ruling party, war duration, offensive/defensive wars)."
 
   RULE_DR_ALLIANCE_RP:0 "Alliance Research Power"
-  RULE_DR_ALLIANCE_RP_DESC:0 "Sets the maximum Research Power bonus from faction members. Each ally can contribute up to 5% of its RP, scaled by relations, but the total alliance bonus is capped by this rule. "
+  RULE_DR_ALLIANCE_RP_DESC:0 "Sets the maximum Research Power bonus from faction members. Each ally can contribute up to 5% of its RP, scaled by relations, but the total alliance bonus is capped by this rule."
   RULE_DR_ALLIANCE_RP_OFF:0 "No bonus"
   RULE_DR_ALLIANCE_RP_OFF_DESC:0 "Being in a faction does not grant any alliance Research Power bonus."
   RULE_DR_ALLIANCE_RP_PLUS_5:0 "Max +5% RP from allies"
@@ -112,10 +98,8 @@
   RULE_DR_ALLIANCE_RP_PLUS_30_DESC:0 "Alliance bonuses can provide up to +30% Research Power from faction members (each ally up to 5% of its RP, scaled by relations, capped at +30% total)."
 
   RULE_DR_LAW_RP:0 "Law-based Research Power Modifiers"
-  RULE_DR_LAW_RP_DESC:0 "Controls whether trade, economy and conscription laws modify Research Power (RP). When disabled, law changes no longer affect RP – only factories, facilities, war-time and alliance rules apply."
+  RULE_DR_LAW_RP_DESC:0 "Controls whether trade, economy and conscription laws modify Research Power (RP). When disabled, law changes no longer affect RP - only factories, facilities, war-time and alliance rules apply."
   RULE_DR_LAW_RP_ON:0 "Enabled (default)"
   RULE_DR_LAW_RP_ON_DESC:0 "Keep all existing Research Power modifiers from trade laws (e.g. Free Trade), economy laws (e.g. Civilian Economy, War Economy) and conscription laws (e.g. Extensive Conscription)."
   RULE_DR_LAW_RP_OFF:0 "Disabled"
   RULE_DR_LAW_RP_OFF_DESC:0 "Ignore all Research Power modifiers from trade, economy and conscription laws. This makes RP depend only on factories, facilities and other Dynamic Research rules."
-
-

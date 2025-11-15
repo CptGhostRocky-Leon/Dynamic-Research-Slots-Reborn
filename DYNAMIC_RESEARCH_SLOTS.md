@@ -117,7 +117,7 @@ Arrays:
 
 - `base_research_for_slot[index]` – baseline RP thresholds for each slot.
 - `research_for_slot[index]` – effective thresholds actually used, after Easy Slot adjustments.
-- `max_research_slots` – maximum slot index that currently has a defined threshold.
+- `max_research_slots` – RP threshold of the highest defined research slot (used as helper for UI logic).
 - `next_research_slot_at` – RP threshold for the next slot above `target_research_slots`.
 
 ---
@@ -240,6 +240,11 @@ The following rules influence `total_rp_modifier` as positive or negative terms:
 - `DR_ALLIANCE_RP_RULE` – determines the maximum positive RP bonus you can get from being in an alliance (up to +30% at the high end).
 - `DR_LAW_RP_RULE` – toggles whether trade/economy/conscription laws modify RP; when turned off, law-based RP modifiers are removed.
 
+Compatibility note:
+
+- `dr_apply_law_rp_logic` assumes the vanilla law idea IDs (`free_trade`, `export_focus`, `closed_economy`, `civilian_economy`, `early_mobilization`, `war_economy`, `total_mobilization`, `extensive_conscription`, `service_by_requirement`, `all_adults_serve`, `scraping_the_barrel`).
+- If a large overhaul mod renames or replaces these ideas, create a submod that overrides `00_dr_dynamic_research_modifiers.txt` and adjust only the `dr_apply_law_rp_logic` block to the new IDs.
+
 Together with the war penalty, these form a **single additive modifier** `total_rp_modifier`. Finally:
 
 - A temporary variable `temp` is set to `1 + total_rp_modifier`.
@@ -262,7 +267,7 @@ Once `total_research_power` is known, the system determines the desired number o
    - For AI countries, the same event can be fired without cooldown (mainly for debugging or logging).
 
 3. Compute UI helper values:
-   - `max_research_slots` – last valid index in `research_for_slot` minus 1 (to ignore the dummy index 0).
+   - `max_research_slots` – RP threshold of the highest defined research slot (used only as a helper for the “next slot” calculation).
    - `next_research_slot_at` – RP required for the next slot above `target_research_slots` (if any).
 
 4. Apply the result to the game:
