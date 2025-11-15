@@ -214,6 +214,8 @@ If the country has any **Experimental Facilities**, additional flat RP is added 
 - Each air facility: +35 RP.
 - Each land facility: +35 RP.
 
+Because the building variables (`nuclear_facility`, `naval_facility`, `air_facility`, `land_facility`) only exist at **state** scope, the script does not read them directly on the country. Instead `recalculate_dynamic_research_slots` runs an `every_owned_state` loop to count how many owned states have each facility type and stores these counts in the internal variables `nuclear_facility_count`, `naval_facility_count`, `air_facility_count` and `land_facility_count`. These counters are then multiplied by the configured `rp_per_*_facility` values from `00_dr_dynamic_research_config.txt` to obtain the flat RP bonus.
+
 This RP goes both into:
 - `total_research_power`
 - `facility_research_power` (for display/debug purposes).

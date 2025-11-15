@@ -96,31 +96,83 @@ recalculate_dynamic_research_slots = {
 		add_to_variable = { total_research_power = military_research_power }
 		add_to_variable = { total_research_power = naval_research_power }
 
-		# Experimental Facilities give additional flat Research Power
+		# Experimental Facilities give additional flat Research Power.
+		# Building variables (nuclear_facility, naval_facility, air_facility, land_facility)
+		# are only defined at state scope, so we need to iterate over owned states
+		# and accumulate counts per facility type on the country.
+		set_variable = { nuclear_facility_count = 0 }
+		set_variable = { naval_facility_count = 0 }
+		set_variable = { air_facility_count = 0 }
+		set_variable = { land_facility_count = 0 }
+
+		every_owned_state = {
+			if = {
+				limit = { nuclear_facility > 0 }
+				ROOT = { add_to_variable = { nuclear_facility_count = 1 } }
+			}
+			if = {
+				limit = { naval_facility > 0 }
+				ROOT = { add_to_variable = { naval_facility_count = 1 } }
+			}
+			if = {
+				limit = { air_facility > 0 }
+				ROOT = { add_to_variable = { air_facility_count = 1 } }
+			}
+			if = {
+				limit = { land_facility > 0 }
+				ROOT = { add_to_variable = { land_facility_count = 1 } }
+			}
+		}
+
+		# Apply per-facility RP based on accumulated counts.
 		if = {
-			limit = { nuclear_facility > 0 }
-			set_variable = { temp_facility_rp = nuclear_facility }
+			limit = {
+				check_variable = {
+					var = nuclear_facility_count
+					value = 0
+					compare = greater_than
+				}
+			}
+			set_variable = { temp_facility_rp = nuclear_facility_count }
 			multiply_variable = { temp_facility_rp = rp_per_nuclear_facility }
 			add_to_variable = { total_research_power = temp_facility_rp }
 			add_to_variable = { facility_research_power = temp_facility_rp }
 		}
 		if = {
-			limit = { naval_facility > 0 }
-			set_variable = { temp_facility_rp = naval_facility }
+			limit = {
+				check_variable = {
+					var = naval_facility_count
+					value = 0
+					compare = greater_than
+				}
+			}
+			set_variable = { temp_facility_rp = naval_facility_count }
 			multiply_variable = { temp_facility_rp = rp_per_naval_facility }
 			add_to_variable = { total_research_power = temp_facility_rp }
 			add_to_variable = { facility_research_power = temp_facility_rp }
 		}
 		if = {
-			limit = { air_facility > 0 }
-			set_variable = { temp_facility_rp = air_facility }
+			limit = {
+				check_variable = {
+					var = air_facility_count
+					value = 0
+					compare = greater_than
+				}
+			}
+			set_variable = { temp_facility_rp = air_facility_count }
 			multiply_variable = { temp_facility_rp = rp_per_air_facility }
 			add_to_variable = { total_research_power = temp_facility_rp }
 			add_to_variable = { facility_research_power = temp_facility_rp }
 		}
 		if = {
-			limit = { land_facility > 0 }
-			set_variable = { temp_facility_rp = land_facility }
+			limit = {
+				check_variable = {
+					var = land_facility_count
+					value = 0
+					compare = greater_than
+				}
+			}
+			set_variable = { temp_facility_rp = land_facility_count }
 			multiply_variable = { temp_facility_rp = rp_per_land_facility }
 			add_to_variable = { total_research_power = temp_facility_rp }
 			add_to_variable = { facility_research_power = temp_facility_rp }
