@@ -51,7 +51,57 @@ As a submodder you usually only touch `00_dr_dynamic_research_config.txt` – an
 
 To avoid editing the core logic, the mod exposes empty scripted effects that you can override in your submod. All hooks are empty in the base mod, so overriding them in your submod is conflict-free.
 
-**Quick start**: For a ready-to-use template with all hooks and examples, see `submod_template.txt`.
+**Quick start**: For a ready-to-use template with all hooks and examples, see `submod_template.txt`. For complete, working example submods, see the `example_submods/` directory on GitHub (developer resources, not published on Steam Workshop).
+
+**Hook execution flow**:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ INITIALIZATION FLOW (runs once per country at game start)   │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  initialize_dynamic_research_slots                          │
+│    │                                                          │
+│    ├─► dr_check_compatibility_submods  ← Hook 0 (rare)     │
+│    │                                                          │
+│    ├─► dr_apply_research_config                              │
+│    │     │                                                    │
+│    │     └─► dr_apply_research_config_submods  ← Hook 2     │
+│    │                                                          │
+│    └─► dr_initialize_submods  ← Hook 1                       │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ RUNTIME FLOW (runs daily for players, staggered for AI)     │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  recalculate_dynamic_research_slots                         │
+│    │                                                          │
+│    ├─► Easy Slot logic & threshold rebuilding               │
+│    │                                                          │
+│    ├─► dr_adjust_research_thresholds_submods  ← Hook 4      │
+│    │                                                          │
+│    ├─► dr_apply_factory_modifiers_submods  ← Hook 3         │
+│    │                                                          │
+│    ├─► Factory RP calculation (civ/mil/nav)                │
+│    │                                                          │
+│    ├─► Count vanilla facilities (nuclear/naval/air/land)    │
+│    │                                                          │
+│    ├─► dr_collect_facility_counts_submods  ← Hook 5         │
+│    │                                                          │
+│    ├─► Apply vanilla facility RP                              │
+│    │                                                          │
+│    ├─► dr_apply_facility_rp_submods  ← Hook 6               │
+│    │                                                          │
+│    ├─► Apply global modifiers (war/alliance/law)             │
+│    │                                                          │
+│    ├─► dr_total_rp_modifier_submods  ← Hook 7               │
+│    │                                                          │
+│    └─► Calculate target slots & apply changes                │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+```
 
 **Hook overview**:
 

@@ -1,0 +1,26 @@
+# Example Submod: Balance Tweak
+# This is a complete example showing how to make simple balance adjustments
+
+# Hook: Adjust configuration values
+# This runs after vanilla defaults and game rules are applied
+dr_apply_research_config_submods = {
+	# Example 1: Increase civilian factory RP by +1
+	# This adds to the base value (3), making it 4 RP per civ factory
+	add_to_variable = { research_power_per_civ = 1 }
+	
+	# Example 2: Increase nuclear facility RP by +10
+	# This adds to the base value (50), making it 60 RP per nuclear facility
+	add_to_variable = { rp_per_nuclear_facility = 10 }
+}
+
+# Hook: Final RP modifier adjustments
+# This runs after all standard modifiers have been applied
+dr_total_rp_modifier_submods = {
+	# Example: Stability bonus - countries with high stability get +5% RP
+	# This is a multiplicative bonus applied to total_research_power
+	if = {
+		limit = { has_stability > 0.8 }
+		multiply_variable = { total_research_power = 1.05 }  # +5% RP
+	}
+}
+

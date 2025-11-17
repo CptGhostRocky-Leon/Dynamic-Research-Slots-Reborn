@@ -86,6 +86,56 @@ AI countries:
 
 To keep submods compatible, the system exposes several empty scripted effects that run at fixed points. You can override any of them in your own mod; they incur zero cost if left untouched.
 
+**Hook execution flow**:
+
+```
+INITIALIZATION (once per country at game start):
+┌─────────────────────────────────────────────────────────────┐
+│ initialize_dynamic_research_slots                           │
+│   │                                                           │
+│   ├─► dr_check_compatibility_submods  ← Hook 0              │
+│   │    (before config - rare use case)                       │
+│   │                                                           │
+│   ├─► dr_apply_research_config                               │
+│   │    └─► dr_apply_research_config_submods  ← Hook 2       │
+│   │         (config tweaks)                                  │
+│   │                                                           │
+│   └─► dr_initialize_submods  ← Hook 1                      │
+│        (after config - common use case)                     │
+└─────────────────────────────────────────────────────────────┘
+
+RUNTIME (daily for players, staggered for AI):
+┌─────────────────────────────────────────────────────────────┐
+│ recalculate_dynamic_research_slots                          │
+│   │                                                           │
+│   ├─► Easy Slot logic & threshold rebuilding                │
+│   │    └─► dr_adjust_research_thresholds_submods  ← Hook 4  │
+│   │                                                           │
+│   ├─► dr_apply_factory_modifiers_submods  ← Hook 3          │
+│   │    (set civ/mil/nav modifiers)                           │
+│   │                                                           │
+│   ├─► Factory RP calculation                                │
+│   │    (civ × count × modifier + mil × count × modifier...) │
+│   │                                                           │
+│   ├─► Count vanilla facilities                               │
+│   │    (nuclear/naval/air/land via every_owned_state)       │
+│   │    └─► dr_collect_facility_counts_submods  ← Hook 5     │
+│   │         (count custom buildings)                          │
+│   │                                                           │
+│   ├─► Apply vanilla facility RP                              │
+│   │    └─► dr_apply_facility_rp_submods  ← Hook 6           │
+│   │         (convert custom counts to RP)                     │
+│   │                                                           │
+│   ├─► Apply global modifiers                                 │
+│   │    (war/alliance/law modifiers)                          │
+│   │    └─► dr_total_rp_modifier_submods  ← Hook 7           │
+│   │         (final RP adjustments)                          │
+│   │                                                           │
+│   └─► Calculate target slots & apply changes                 │
+│        (compare total_research_power to thresholds)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
 | Hook | Called from | Timing | Purpose |
 |------|-------------|--------|---------|
 | `dr_check_compatibility_submods` | `initialize_dynamic_research_slots` | Very start of initialization (before config) | Perform compatibility checks, signal mod presence, or set flags before config is applied. |
@@ -200,7 +250,7 @@ Key steps:
 2. Sets mod metadata (must be first):
    - Calls `dr_set_mod_metadata` which sets:
      - `set_global_flag = dynamic_research_slots_active` (once globally)
-     - `set_variable = { dr_mod_version = 1.1 }` (per country)
+     - `set_variable = { dr_mod_version = 1.3 }` (per country)
 
 3. Sets base slot counts:
    - `current_research_slots = amount_research_slots`

@@ -1,0 +1,32 @@
+# Example Submod: Factory Modifiers
+# This example shows how to add factory RP modifiers based on ideas/spirits/focuses
+
+# Hook: Apply factory modifiers
+# This runs BEFORE factory RP calculation
+# Use this to set multiplicative modifiers for factory types
+dr_apply_factory_modifiers_submods = {
+	# Example 1: Free Trade idea gives +10% civilian factory RP
+	# The modifier is multiplicative: 0.10 = +10%
+	if = {
+		limit = { has_idea = free_trade }
+		add_to_variable = { civilian_rp_modifier = 0.10 }
+	}
+	
+	# Example 2: War Economy idea gives +15% military factory RP
+	if = {
+		limit = { has_idea = war_economy }
+		add_to_variable = { military_rp_modifier = 0.15 }
+	}
+	
+	# Example 3: Fictional "Naval Focus" idea gives +20% naval factory RP
+	# Note: This idea doesn't exist in vanilla - replace with your own idea ID
+	# if = {
+	#   limit = { has_idea = naval_research_focus }
+	#   add_to_variable = { naval_rp_modifier = 0.20 }
+	# }
+	
+	# Example 4: Multiple modifiers can stack
+	# If a country has both Free Trade and another idea, both modifiers apply
+	# Example: Free Trade (+10%) + another idea (+5%) = +15% total
+}
+

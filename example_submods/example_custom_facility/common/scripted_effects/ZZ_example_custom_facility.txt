@@ -1,0 +1,46 @@
+# Example Submod: Custom Facility
+# This example shows how to add RP from custom buildings
+
+# Hook: Collect facility counts
+# This runs after vanilla facilities are counted
+# Use this to count your own custom buildings
+dr_collect_facility_counts_submods = {
+	# Initialize counter
+	set_variable = { quantum_lab_count = 0 }
+	
+	# Count quantum labs across all owned states
+	# Note: Building variables (like quantum_lab) are only available at state scope
+	every_owned_state = {
+		if = {
+			limit = { quantum_lab > 0 }
+			# Add to the root country's counter
+			ROOT = { add_to_variable = { quantum_lab_count = 1 } }
+		}
+	}
+}
+
+# Hook: Apply facility RP
+# This runs after vanilla facility RP is calculated
+# Use this to convert your building counts into RP
+dr_apply_facility_rp_submods = {
+	# Only add RP if we have any quantum labs
+	if = {
+		limit = {
+			check_variable = {
+				var = quantum_lab_count
+				value = 0
+				compare = greater_than
+			}
+		}
+		# Calculate RP: 40 RP per quantum lab
+		set_variable = { temp_facility_rp = quantum_lab_count }
+		multiply_variable = { temp_facility_rp = 40 }
+		
+		# Add to total RP (used for slot calculations)
+		add_to_variable = { total_research_power = temp_facility_rp }
+		
+		# Also add to facility_research_power (for display/debug purposes)
+		add_to_variable = { facility_research_power = temp_facility_rp }
+	}
+}
+

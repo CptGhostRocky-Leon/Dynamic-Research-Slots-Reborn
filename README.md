@@ -49,6 +49,10 @@ If you want to extend, rebalance or integrate the mod into a larger project, ple
 
 **Quick start for submods**: Copy `docs/submod_template.txt` to your submod at `common/scripted_effects/ZZ_your_submod_name.txt`, uncomment the hooks you need, and adjust values.
 
+**Example submods**: Complete, working example submods are available on **GitHub** in the `example_submods/` directory. These demonstrate common use cases (balance tweaks, custom facilities, factory modifiers) and serve as reference implementations for developers. The examples are not published on Steam Workshop - they are developer resources available only on GitHub.
+
+**Note on the hook system**: You may notice that the mod provides many empty hooks (8 total) that do nothing by default. This is **intentionally untypical** for HOI4 mods, which often prefer to overwrite entire files. However, this mod is built with a very modular architecture and places high value on compatibility. The empty hooks allow submods to extend functionality without conflicts, enabling multiple submods to work together seamlessly. This approach prioritizes compatibility and modularity over the more common "overwrite entire files" pattern in the HOI4 modding community.
+
 Key script files:
 
 - `common/scripted_effects/00_dr_mod_metadata.txt` – mod metadata (version, compatibility signals).
