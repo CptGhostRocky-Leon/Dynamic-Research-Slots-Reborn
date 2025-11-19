@@ -7,9 +7,9 @@
 Dynamic Research Slots Reborn is designed with performance in mind. The base mod has **negligible performance impact** (<0.01ms per day for typical gameplay), with most overhead coming from core RP calculations that run daily for players and staggered for AI. The mod uses efficient algorithms, conditional execution, and staggered updates for AI countries to minimize computational cost.
 
 **Key Performance Characteristics:**
-- **Startup**: <1ms total overhead for all countries
+- **Startup**: ~20-30ms total overhead (includes one-time initial calculation for all AI countries to ensure accuracy from day 1)
 - **Daily (Player)**: ~0.5-2ms per recalculation (depending on state count and configuration)
-- **Daily (AI)**: Staggered updates (~1/30th of AI countries per day) reduce impact to ~0.1ms per day
+- **Daily (AI)**: Staggered updates (~1/30th of AI countries per day) reduce impact to ~1-1.5ms per day (full calculation cost; compatibility hooks overhead is only ~0.1ms/day)
 - **Compatibility Features**: Zero overhead when unused (empty hooks, fast flag checks)
 
 The performance impact depends primarily on:
@@ -31,15 +31,24 @@ At game start, every country runs `initialize_dynamic_research_slots` once:
 - Threshold array building: ~0.001ms
 - Easy Slot conversion (if applicable): ~0.001ms
 - Compatibility hooks (3 empty hooks): ~0.0001ms each
+- Modifier calculation (`calculate_modifiers_to_rp`): ~0.01ms
 
-**Total per country**: ~0.015ms
+**AI countries additionally:**
+- Timer initialization (`dr_days_until_update`): ~0.001ms
+- Initial research slot calculation (`recalculate_dynamic_research_slots`): ~0.2-1.5ms (same as runtime calculation)
+  - This ensures AI countries have correct research slots from day 1
+
+**Total per country**: 
+- Player: ~0.025ms
+- AI: ~0.2-1.5ms (includes initial calculation)
 
 **Global operations:**
 - Global flag set (`dynamic_research_slots_active`): ~0.01ms (once, cached by engine)
 
-**Total startup overhead**: ~70 countries × 0.015ms + 0.01ms ≈ **~1ms total**
+**Total startup overhead**: 
+- ~1 player × 0.025ms + ~69 AI × 0.2-1.5ms + 0.01ms ≈ **~14-104ms total** (typically ~20-30ms for average game)
 
-✅ **Verdict**: Negligible startup impact. The initialization is fast and runs only once.
+✅ **Verdict**: Negligible startup impact. The one-time initial calculation for AI countries ensures accuracy from game start while maintaining performance through staggered updates afterward.
 
 ### 1.2. Runtime Performance (`on_daily`)
 
@@ -81,12 +90,13 @@ Player countries recalculate **every day** for responsive gameplay:
 
 AI countries use **staggered updates** to reduce overhead:
 
-- Only ~1/30th of AI countries recalculate per day (random offset, 30-day cycle)
-- Same calculation cost as player when triggered
-- **Per day impact**: ~(AI_countries / 30) × 1ms ≈ **~2-3ms per day** for 70 AI countries
-- **Annual impact**: ~2-3ms per day × 365 days ≈ **~0.7-1.1 seconds per year**
+- **Startup**: All AI countries get an initial calculation at game start to ensure correct research slots from day 1 (see startup performance above)
+- **Runtime**: Only ~1/30th of AI countries recalculate per day (random offset, 30-day cycle, timer initialized at startup)
+- Same calculation cost as player when triggered (~0.2-1.5ms per calculation, typically ~0.5ms)
+- **Per day impact**: ~(AI_countries / 30) × 0.5ms ≈ **~1-1.5ms per day** for 70 AI countries
+- **Annual impact**: ~1-1.5ms per day × 365 days ≈ **~0.4-0.5 seconds per year**
 
-✅ **Verdict**: Excellent performance. Staggered AI updates keep overhead minimal while maintaining game balance.
+✅ **Verdict**: Excellent performance. The initial startup calculation ensures accuracy from day 1, while staggered runtime updates keep daily overhead minimal while maintaining game balance.
 
 ### 1.3. Performance Bottlenecks
 
@@ -287,9 +297,12 @@ The compatibility improvements add minimal overhead to the base mod. All new hoo
 - Contains: 1 global flag set (only executed once due to `set_global_flag` behavior)
 - Contains: 1 variable set per country
 
-**Total startup overhead**: ~70 × 3 initialization hooks + 1 global flag + 70 variables ≈ ~210 hook calls (all empty if no submods)
+**Total startup overhead**: 
+- Hook calls: ~70 × 3 initialization hooks + 1 global flag + 70 variables ≈ ~210 hook calls (all empty if no submods)
+- AI initial calculations: ~69 AI × 0.5ms ≈ ~35ms (one-time, ensures correct research slots from day 1)
+- **Total**: ~35-40ms (typically ~20-30ms for average game)
 
-**Note**: Performance difference between 2 and 3 empty hooks is **negligible** (~0.07ms total), so keeping both hooks for flexibility is worthwhile.
+**Note**: Performance difference between 2 and 3 empty hooks is **negligible** (~0.07ms total), so keeping both hooks for flexibility is worthwhile. The one-time AI calculation at startup ensures accuracy while maintaining performance through staggered updates afterward.
 
 #### 3.2.2. Daily Updates (`on_daily`)
 
@@ -300,7 +313,8 @@ The compatibility improvements add minimal overhead to the base mod. All new hoo
 - Contains: Edge-case validations *(since version 1.4)* - ~0.0006ms total overhead
 
 **AI countries**:
-- `recalculate_dynamic_research_slots` runs **every ~30 days** (staggered)
+- **Note**: AI countries get an initial calculation at startup (see section 1.1 above) to ensure correct research slots from day 1.
+- `recalculate_dynamic_research_slots` runs **every ~30 days** (staggered, timer initialized at startup)
 - Same hooks and checks as player
 - Edge-case validations *(since version 1.4)* - same overhead as player
 
@@ -326,11 +340,13 @@ The compatibility improvements add minimal overhead to the base mod. All new hoo
 - **Edge-case validations** *(since version 1.4)*: ~0.0006ms per recalculation (facility counts, modifier caps, total RP, array validation)
 - **Conditional execution**: The flag checks actually **improve** performance by skipping expensive modifier calculations when disabled
 
-**Per day impact**: 
+**Per day impact** (compatibility hooks overhead only - empty hooks, flag checks, validations): 
 - Player: ~0.0036ms (includes validations)
 - AI: ~0.0036ms × (AI_countries / 30) ≈ ~0.1ms for 70 AI countries
 
-**Annual impact**: ~0.1ms per day × 365 days ≈ ~36.5ms per year
+**Note**: This is just the overhead of compatibility features (hooks, flags, validations). The **full recalculation cost** including all RP calculations is much higher (~0.5ms per recalculation, see section 1.2 above), resulting in ~1-1.5ms per day for AI countries.
+
+**Annual impact** (hooks overhead only): ~0.1ms per day × 365 days ≈ ~36.5ms per year
 
 **Note**: Edge-case validations added in version 1.4 add minimal overhead (~0.0006ms) but significantly improve robustness by preventing calculation errors from invalid variable states.
 

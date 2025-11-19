@@ -14,6 +14,22 @@ on_actions = {
           limit = { is_ai = no }
           country_event = dynamic_research_slots.6
         }
+
+        # AI countries need an initial calculation at startup to set correct research slots.
+        # After this, they use staggered updates (every ~30 days) for performance.
+        if = {
+          limit = { is_ai = yes }
+          # Initialize the staggered update timer at startup.
+          set_temp_variable_to_random = {
+            var = dr_rand_offset
+            min = 1
+            max = 30
+            integer = yes
+          }
+          set_variable = { dr_days_until_update = var:dr_rand_offset }
+          # Perform initial calculation to set correct research slots from day 1.
+          recalculate_dynamic_research_slots = yes
+        }
       }
     }
   }
@@ -58,10 +74,12 @@ on_actions = {
       }
 
       # AI logic: recalculate roughly every 30 days, staggered.
+      # Note: AI countries get an initial calculation at startup (in on_startup),
+      # then use staggered updates here for performance optimization.
       if = {
         limit = { is_ai = yes }
 
-        # Initialize random offset if not yet set.
+        # Initialize random offset if not yet set (should be set at startup, but handle edge cases).
         if = {
           limit = { NOT = { has_variable = dr_days_until_update } }
           set_temp_variable_to_random = {

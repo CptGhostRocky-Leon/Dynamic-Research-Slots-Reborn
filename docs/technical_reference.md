@@ -56,7 +56,13 @@ At game start, every country runs:
 - `initialize_dynamic_research_slots = yes`
 - `calculate_modifiers_to_rp = yes`
 
-This sets up all internal variables and the RP thresholds, but does **not** immediately change the number of vanilla research slots beyond the initial configuration.
+This sets up all internal variables and the RP thresholds.
+
+**AI countries** additionally:
+- Initialize the staggered update timer (`dr_days_until_update`) with a random offset (1–30 days)
+- Run `recalculate_dynamic_research_slots = yes` to set correct research slots from day 1
+
+This ensures AI countries have accurate research slots immediately at game start, before their first staggered update cycle begins.
 
 A one-time startup explanation event (`dynamic_research_slots.6`) is shown to human players.
 
@@ -75,10 +81,12 @@ Player country:
 - Uses a cooldown variable `dr_player_event_cooldown` to avoid spamming the player with events (14-day cooldown after each slot change event).
 
 AI countries:
-- Use a staggered update: `dr_days_until_update` counts down from a random offset (1–30 days), then triggers:
+- **Note**: AI countries get an initial calculation at startup (see `on_startup` above) to ensure correct research slots from day 1.
+- Use a staggered update for subsequent calculations: `dr_days_until_update` counts down from a random offset (1–30 days, initialized at startup), then triggers:
   - `calculate_modifiers_to_rp`
   - `recalculate_dynamic_research_slots`
 - The timer resets to 30 days after each update cycle.
+- This staggered approach reduces performance overhead while maintaining accurate research slots.
 
 ---
 
