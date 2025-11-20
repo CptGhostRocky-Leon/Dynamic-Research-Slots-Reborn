@@ -197,7 +197,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 30
+					value = war_phase_offensive_threshold_1
 					compare = greater_than_or_equals
 				}
 			}
@@ -207,7 +207,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 60
+					value = war_phase_offensive_threshold_2
 					compare = greater_than_or_equals
 				}
 			}
@@ -217,7 +217,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 90
+					value = war_phase_offensive_threshold_3
 					compare = greater_than_or_equals
 				}
 			}
@@ -236,7 +236,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 60
+					value = war_phase_defensive_threshold_1
 					compare = greater_than_or_equals
 				}
 			}
@@ -246,7 +246,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 120
+					value = war_phase_defensive_threshold_2
 					compare = greater_than_or_equals
 				}
 			}
@@ -256,7 +256,7 @@ dr_calculate_war_phase_factor = {
 			limit = {
 				check_variable = {
 					var = dr_days_in_war
-					value = 180
+					value = war_phase_defensive_threshold_3
 					compare = greater_than_or_equals
 				}
 			}
