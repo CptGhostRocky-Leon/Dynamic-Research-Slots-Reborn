@@ -1,0 +1,44 @@
+scripted_gui = {
+	# 1. Main Window Logic
+	custom_gui_logic = {
+		context_type = player_context
+		window_name = "custom_gui_window"
+		visible = {
+			has_country_flag = custom_gui_open
+		}
+		ai_enabled = {
+			always = no
+		}
+		effects = {
+			# Explicitly closes the GUI. Used by the close button.
+			close_custom_gui = {
+				clr_country_flag = custom_gui_open
+			}
+		}
+	}
+	# 2. Topbar Button Logic (Always Visible)
+	custom_gui_topbar_logic = {
+		context_type = player_context
+		window_name = "custom_gui_topbar_container"
+		visible = {
+			always = yes
+		}
+		ai_enabled = {
+			always = no
+		}
+		effects = {
+			# Toggles the flag. Used by the topbar button.
+			toggle_custom_gui = {
+				if = {
+					limit = {
+						has_country_flag = custom_gui_open
+					}
+					clr_country_flag = custom_gui_open
+				}
+				else = {
+					set_country_flag = custom_gui_open
+				}
+			}
+		}
+	}
+}

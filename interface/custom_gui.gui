@@ -1,0 +1,100 @@
+guiTypes = {
+
+	# 1. The Opener Button (Overlay Strategy)
+	# Positioned to float over the topbar without modifying vanilla files.
+	# 1. The Opener Button (Overlay Strategy)
+	# Positioned to float over the topbar without modifying vanilla files.
+	containerWindowType = {
+		name = "custom_gui_topbar_container"
+		position = { x = 500 y = 4 } # Adjust x to fit between vanilla buttons
+		size = { width = 100 height = 100 } # Ensure it has size to render
+		clipping = no
+		
+		moveable = yes # Allow user to move the icon
+		
+		buttonType = {
+			name = "toggle_custom_gui"
+			position = { x = 0 y = 0 }
+			quadTextureSprite = "GFX_topbar_technology"
+			pdx_tooltip = "OPEN_CUSTOM_GUI_TT"
+			clicksound = click_default
+			oversound = ui_menu_over
+			shortcut = "ctrl+r"
+			onclick = "toggle_custom_gui" # Re-added onclick
+		}
+	}
+
+	# 2. The Main Window
+	containerWindowType = {
+		name = "custom_gui_window"
+		position = { x = -275 y = -200 }
+		size = { width = 550 height = 500 } # Increased height for content
+		orientation = CENTER
+		origo = center
+		moveable = yes
+		fade_time = 300
+		fade_type = linear
+		click_to_front = yes
+		
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_tiled_window_thin_border2"
+		}
+		
+		iconType = {
+			name = "header_bg"
+			spriteType = "GFX_header_bg"
+			position = { x = 5 y = 7 }
+			Orientation = "UPPER_LEFT"
+			alwaystransparent = yes
+		}
+		
+		instantTextBoxType = {
+			name = "custom_gui_title"
+			position = { x = 45 y = 8 }
+			font = "hoi_24header"
+			text = "custom_gui_title"
+			maxWidth = 400
+			maxHeight = 24
+			format = center
+			fixedsize = yes
+		}
+		
+		buttonType = {
+			name = "close_custom_gui"
+			position = { x = -45 y = 9 }
+			quadTextureSprite = "GFX_closebutton"
+			buttonFont = "Main_14_black"
+			shortcut = "ESCAPE"
+			Orientation = "UPPER_RIGHT"
+			clicksound = click_close
+			pdx_tooltip = "CLOSE"
+			onclick = "close_custom_gui" # Re-added onclick
+		}
+		
+		# Content Area
+		containerWindowType = {
+			name = "custom_gui_content_area"
+			position = { x = 15 y = 50 }
+			size = { width = 520 height = 430 }
+			
+			background = {
+				name = "Content_Background"
+				quadTextureSprite = "GFX_tiled_window_transparent" 
+			}
+			
+			# Research Power Info (from decisions)
+			instantTextBoxType = {
+				name = "research_power_info"
+				position = { x = 10 y = 10 }
+				font = "hoi_16mbs"
+				text = "dynamic_research_slots_decisions_desc"
+				maxWidth = 500
+				maxHeight = 200
+				format = left
+				scrollbartype = "standardtext_slider"
+			}
+			
+		}
+	}
+}

@@ -1,0 +1,10 @@
+custom_gui_testing = {
+	icon = generic_research
+	priority = 100
+	allowed = {
+		always = yes
+	}
+	visible = {
+		always = yes
+	}
+}
