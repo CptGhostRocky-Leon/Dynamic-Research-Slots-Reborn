@@ -45,37 +45,30 @@ dr_calculate_war_penalty_factors = {
 	# Ruling party factor (0.0-0.4), based on ruling ideology popularity.
 	set_variable = { war_penalty_factor_party = 0.4 }
 
-	# Calculate government support factor using helper effect
-	# Democratic government
+	# Calculate government support factor using helper effects
+	dr_set_government_popularity = yes
+	dr_get_government_support_factor = yes
+	set_variable = { war_penalty_factor_party = government_support_factor }
+}
+
+# Helper effect: Set temp_government_popularity based on current government type
+# Sets: temp_government_popularity (democratic, fascism, communism, or neutrality)
+dr_set_government_popularity = {
 	if = {
 		limit = { has_government = democratic }
 		set_variable = { temp_government_popularity = democratic }
-		dr_get_government_support_factor = yes
-		set_variable = { war_penalty_factor_party = government_support_factor }
 	}
-
-	# Fascist government
 	if = {
 		limit = { has_government = fascism }
 		set_variable = { temp_government_popularity = fascism }
-		dr_get_government_support_factor = yes
-		set_variable = { war_penalty_factor_party = government_support_factor }
 	}
-
-	# Communist government
 	if = {
 		limit = { has_government = communism }
 		set_variable = { temp_government_popularity = communism }
-		dr_get_government_support_factor = yes
-		set_variable = { war_penalty_factor_party = government_support_factor }
 	}
-
-	# Neutral or other government
 	if = {
 		limit = { has_government = neutrality }
 		set_variable = { temp_government_popularity = neutrality }
-		dr_get_government_support_factor = yes
-		set_variable = { war_penalty_factor_party = government_support_factor }
 	}
 }
 
@@ -163,6 +156,20 @@ dr_get_government_support_factor = {
 		set_variable = { government_support_factor = 0.3 }
 	}
 	# Below very_low threshold remains 0.4 (worst, default)
+}
+
+# Helper effect: Map government_support_factor to peace bonus
+# Expects: government_support_factor (0.0, 0.1, 0.2, 0.3, or 0.4)
+# Modifies: peace_rp_bonus (adds 0.03 for 0.0, 0.02 for 0.1, 0.0 for 0.2+)
+dr_map_government_support_to_peace_bonus = {
+	if = {
+		limit = { check_variable = { var = government_support_factor value = 0.0 compare = equals } }
+		add_to_variable = { peace_rp_bonus = 0.03 }
+	}
+	if = {
+		limit = { check_variable = { var = government_support_factor value = 0.1 compare = equals } }
+		add_to_variable = { peace_rp_bonus = 0.02 }
+	}
 }
 
 # Calculate war phase factor based on war duration and type
@@ -275,74 +282,12 @@ dr_calculate_peace_bonus = {
 			add_to_variable = { peace_rp_bonus = 0.01 }
 		}
 
-		# Ruling party contribution (using helper effect for consistency)
-		# Democratic government
-		if = {
-			limit = { has_government = democratic }
-			set_variable = { temp_government_popularity = democratic }
-			if = {
-				limit = { check_variable = { var = temp_government_popularity value = 0.85 compare = greater_than } }
-				add_to_variable = { peace_rp_bonus = 0.03 }
-			}
-			if = {
-				limit = {
-					check_variable = { var = temp_government_popularity value = 0.7 compare = greater_than }
-					check_variable = { var = temp_government_popularity value = 0.85 compare = less_than_or_equals }
-				}
-				add_to_variable = { peace_rp_bonus = 0.02 }
-			}
-		}
-
-		# Fascist government
-		if = {
-			limit = { has_government = fascism }
-			set_variable = { temp_government_popularity = fascism }
-			if = {
-				limit = { check_variable = { var = temp_government_popularity value = 0.85 compare = greater_than } }
-				add_to_variable = { peace_rp_bonus = 0.03 }
-			}
-			if = {
-				limit = {
-					check_variable = { var = temp_government_popularity value = 0.7 compare = greater_than }
-					check_variable = { var = temp_government_popularity value = 0.85 compare = less_than_or_equals }
-				}
-				add_to_variable = { peace_rp_bonus = 0.02 }
-			}
-		}
-
-		# Communist government
-		if = {
-			limit = { has_government = communism }
-			set_variable = { temp_government_popularity = communism }
-			if = {
-				limit = { check_variable = { var = temp_government_popularity value = 0.85 compare = greater_than } }
-				add_to_variable = { peace_rp_bonus = 0.03 }
-			}
-			if = {
-				limit = {
-					check_variable = { var = temp_government_popularity value = 0.7 compare = greater_than }
-					check_variable = { var = temp_government_popularity value = 0.85 compare = less_than_or_equals }
-				}
-				add_to_variable = { peace_rp_bonus = 0.02 }
-			}
-		}
-
-		# Neutral or other government
-		if = {
-			limit = { has_government = neutrality }
-			set_variable = { temp_government_popularity = neutrality }
-			if = {
-				limit = { check_variable = { var = temp_government_popularity value = 0.85 compare = greater_than } }
-				add_to_variable = { peace_rp_bonus = 0.03 }
-			}
-			if = {
-				limit = {
-					check_variable = { var = temp_government_popularity value = 0.7 compare = greater_than }
-					check_variable = { var = temp_government_popularity value = 0.85 compare = less_than_or_equals }
-				}
-				add_to_variable = { peace_rp_bonus = 0.02 }
-			}
-		}
+		# Ruling party contribution (using helper effects for consistency)
+		# Calculate government support factor and map to peace bonus
+		dr_set_government_popularity = yes
+		dr_get_government_support_factor = yes
+		# Map government_support_factor to peace bonus: 0.0 -> 0.03, 0.1 -> 0.02, 0.2+ -> 0.0
+		dr_map_government_support_to_peace_bonus = yes
 
 		# Cap at +5%
 		if = {
