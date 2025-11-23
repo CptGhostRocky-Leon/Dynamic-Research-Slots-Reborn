@@ -18,7 +18,7 @@
   dynamic_research_slots.2.a:0 "Идеальный баланс, как и должно быть."
   
   dynamic_research_slots.4.title:0 "Динамические исследования Отладка"
-  dynamic_research_slots.4.desc:0 "Текущий расклад ИМ и внутренние переменные:\n\nВсего ИМ: [?total_research_power]\nИМ от гражданских фабрик: [?civilian_research_power]\nИМ от военных заводов: [?military_research_power]\nИМ от фервей: [?naval_research_power]\nИМ от эксперементальных объектов: [?facility_research_power]\n\nТекущее количество ячеек: [?current_research_slots]\nЦелевое количество ячеек: [?target_research_slots]\nЛёгкие ячейки: [?easy_research_slots]\nКоэффициент лёгких ячеек: [?easy_research_slot_coefficient]\n\nПерезарядка события игрока: [?dr_player_event_cooldown]\nТаймер обновления ИИ: [?dr_days_until_update]"
+  dynamic_research_slots.4.desc:0 "Текущий расклад ИМ и внутренние переменные:\n\nВсего ИМ: [?total_research_power]\nИМ от гражданских фабрик: [?civilian_research_power]\nИМ от военных заводов: [?military_research_power]\nИМ от верфей: [?naval_research_power]\nИМ от эксперементальных объектов: [?facility_research_power]\n\nТекущее количество ячеек: [?current_research_slots]\nЦелевое количество ячеек: [?target_research_slots]\nЛёгкие ячейки: [?easy_research_slots]\nКоэффициент лёгких ячеек: [?easy_research_slot_coefficient]\n\nПерезарядка события игрока: [?dr_player_event_cooldown]\nТаймер обновления ИИ: [?dr_days_until_update]"
   dynamic_research_slots.4.a:0 "Закрыть"
   
   dynamic_research_slots.5.title:0 "Динамические ячейки исследований — Дополнительная информация"
