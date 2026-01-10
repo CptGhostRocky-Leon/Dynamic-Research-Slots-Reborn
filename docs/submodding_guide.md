@@ -658,6 +658,57 @@ dr_get_opinion_factor_from_root = yes
 
 These helpers can be used in custom modifier logic or for testing purposes. For a complete list of all helper effects, see `technical_reference.md` section 9.5.
 
+### 9.1. Slot Stability Timer *(since version 1.6)*
+
+The Slot Stability Timer prevents research slot "flapping" for nations with fluctuating economies. By default, slots have a 30-day grace period before being removed.
+
+**Customizing the grace period:**
+
+```txt
+dr_apply_research_config_submods = {
+  # Override the default grace period (30 days)
+  set_variable = { dr_slot_loss_grace_period = 14 }  # 14 days instead
+  
+  # Or disable completely for instant slot changes
+  # set_variable = { dr_slot_loss_grace_period = 0 }
+}
+```
+
+**Country-specific grace periods:**
+
+```txt
+dr_apply_research_config_submods = {
+  # Longer grace period for minors (they need more time to recover)
+  if = {
+    limit = { is_major = no }
+    set_variable = { dr_slot_loss_grace_period = 60 }  # 60 days for minors
+  }
+}
+```
+
+**Forcing immediate slot loss:**
+
+If you need to bypass the timer for specific events (e.g., capitulation):
+
+```txt
+# In your focus/event/decision effect:
+if = {
+  limit = { has_variable = dr_slot_loss_timer }
+  # Apply pending slot loss immediately
+  set_research_slots = var:dr_pending_target_slots
+  set_variable = { current_research_slots = dr_pending_target_slots }
+  clear_variable = dr_slot_loss_timer
+  clear_variable = dr_pending_target_slots
+}
+recalculate_dynamic_research_slots = yes
+```
+
+**Timer variables available for reading:**
+- `dr_slot_loss_grace_period` – configured grace period (0 = disabled, 30 = default)
+- `dr_slot_loss_timer` – current countdown (only exists if slot loss is pending)
+- `dr_pending_target_slots` – target slots after timer expires
+
+
 ## 10. Debugging and testing submods
 
 For balance submods it's important to see what happens internally. The mod ships with its own debug tools:

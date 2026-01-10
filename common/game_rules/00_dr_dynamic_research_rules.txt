@@ -261,3 +261,48 @@ DR_LAW_RP_RULE = {
 		allow_achievements = yes
 	}
 }
+
+DR_SLOT_STABILITY_RULE = {
+	name = "RULE_DR_SLOT_STABILITY"
+	group = "RULE_GROUP_DYNAMIC_RESEARCH"
+
+	# Off: no grace period, instant slot changes (original behaviour)
+	option = {
+		name = DR_SLOT_STABILITY_OFF
+		text = "RULE_DR_SLOT_STABILITY_OFF"
+		desc = "RULE_DR_SLOT_STABILITY_OFF_DESC"
+		allow_achievements = yes
+	}
+
+	# Light: 7 days grace period before slot removal
+	option = {
+		name = DR_SLOT_STABILITY_LIGHT
+		text = "RULE_DR_SLOT_STABILITY_LIGHT"
+		desc = "RULE_DR_SLOT_STABILITY_LIGHT_DESC"
+		allow_achievements = yes
+	}
+
+	# Moderate: 14 days grace period before slot removal
+	option = {
+		name = DR_SLOT_STABILITY_MODERATE
+		text = "RULE_DR_SLOT_STABILITY_MODERATE"
+		desc = "RULE_DR_SLOT_STABILITY_MODERATE_DESC"
+		allow_achievements = yes
+	}
+
+	# Default: Relaxed - 30 days grace period before slot removal
+	default = {
+		name = DR_SLOT_STABILITY_RELAXED
+		text = "RULE_DR_SLOT_STABILITY_RELAXED"
+		desc = "RULE_DR_SLOT_STABILITY_RELAXED_DESC"
+		allow_achievements = yes
+	}
+
+	# Strict: 60 days grace period before slot removal
+	option = {
+		name = DR_SLOT_STABILITY_STRICT
+		text = "RULE_DR_SLOT_STABILITY_STRICT"
+		desc = "RULE_DR_SLOT_STABILITY_STRICT_DESC"
+		allow_achievements = yes
+	}
+}

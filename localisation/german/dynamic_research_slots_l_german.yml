@@ -33,3 +33,17 @@
   DR_WAR_RULE_NOTE_OFF:0 "§YHinweis:§! Die Spielregel „Forschungskraft im Krieg“ ist auf §Y\"Keine Änderung\"§! gesetzt. Dadurch zeigt die Zeile für Kriegs-/Friedenseffekte in der Übersicht immer §Y0%§! an und hat keinen Einfluss auf die Research Power."
   DR_LAW_RULE_NOTE_OFF:0 "§YHinweis:§! Die Spielregel „Gesetzesbasierte Forschungskraft-Modifikatoren“ ist auf §Y\"Deaktiviert\"§! gesetzt. Die oben aufgeführten Gesetzesmodifikatoren werden ignoriert; nur Fabriken und Experimentellen Standorten tragen zu RP bei."
   DR_ALLIANCE_RULE_NOTE_OFF:0 "§YHinweis:§! Die Spielregel „Forschungskraft durch Bündnisse“ ist auf §Y\"Kein Bonus\"§! gesetzt. Die Zeile für den Allianzbonus in der Übersicht zeigt daher immer §Y0%§! an und hat keinen Einfluss auf die Research Power."
+
+  # Slot-Stabilitäts-Timer Spielregel
+  RULE_DR_SLOT_STABILITY:0 "Slot-Stabilitäts-Timer"
+  RULE_DR_SLOT_STABILITY_OFF:0 "Aus (Sofort)"
+  RULE_DR_SLOT_STABILITY_OFF_DESC:0 "Forschungsslots ändern sich sofort, wenn Schwellenwerte über- oder unterschritten werden. Dies ist das ursprüngliche Verhalten."
+  RULE_DR_SLOT_STABILITY_LIGHT:0 "Leicht (7 Tage)"
+  RULE_DR_SLOT_STABILITY_LIGHT_DESC:0 "Slots werden erst entfernt, nachdem man 7 Tage unter dem Schwellenwert liegt. Slot-Gewinne bleiben sofort."
+  RULE_DR_SLOT_STABILITY_MODERATE:0 "Moderat (14 Tage)"
+  RULE_DR_SLOT_STABILITY_MODERATE_DESC:0 "Slots werden erst entfernt, nachdem man 14 Tage unter dem Schwellenwert liegt. Slot-Gewinne bleiben sofort."
+  RULE_DR_SLOT_STABILITY_RELAXED:0 "Entspannt (30 Tage)"
+  RULE_DR_SLOT_STABILITY_RELAXED_DESC:0 "Slots werden erst entfernt, nachdem man 30 Tage unter dem Schwellenwert liegt. Slot-Gewinne bleiben sofort."
+  RULE_DR_SLOT_STABILITY_STRICT:0 "Streng (60 Tage)"
+  RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Slots werden erst entfernt, nachdem man 60 Tage unter dem Schwellenwert liegt. Slot-Gewinne bleiben sofort."
+

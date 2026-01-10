@@ -33,3 +33,16 @@
   DR_WAR_RULE_NOTE_OFF:0 "§YПримечание:§! Правило Исследовательская мощность в период войны установлено на §Y\"Без изменений\"§!. В результате строка эффекта войны/мира в обзоре всегда будет показывать §Y0%§! и не будет влиять на Исследовательскую Мощность."
   DR_LAW_RULE_NOTE_OFF:0 "§YПримечание:§! Правило Модификаторы ИМ от законов установлено на §Y\"Отключено\"§!. Перечисленные выше модификаторы законов игнорируются; только фабрики и экспериментальные объекты влияют на ИМ."
   DR_ALLIANCE_RULE_NOTE_OFF:0 "§YПримечание:§! Правило Исследовательская мощность альянса установлено на §Y\"Без бонуса\"§!. Строка бонуса альянса в обзоре всегда будет показывать §Y0%§! и не будет влиять на Исследовательскую Мощность."
+
+  # Slot Stability Timer Game Rule
+  RULE_DR_SLOT_STABILITY:0 "Slot Stability Timer"
+  RULE_DR_SLOT_STABILITY_OFF:0 "Off (Instant)"
+  RULE_DR_SLOT_STABILITY_OFF_DESC:0 "Research slots change immediately when thresholds are crossed. This is the original behaviour."
+  RULE_DR_SLOT_STABILITY_LIGHT:0 "Light (7 days)"
+  RULE_DR_SLOT_STABILITY_LIGHT_DESC:0 "Slots are only removed after staying below the threshold for 7 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_MODERATE:0 "Moderate (14 days)"
+  RULE_DR_SLOT_STABILITY_MODERATE_DESC:0 "Slots are only removed after staying below the threshold for 14 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_RELAXED:0 "Relaxed (30 days)"
+  RULE_DR_SLOT_STABILITY_RELAXED_DESC:0 "Slots are only removed after staying below the threshold for 30 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_STRICT:0 "Strict (60 days)"
+  RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Slots are only removed after staying below the threshold for 60 days. Slot gains remain instant."

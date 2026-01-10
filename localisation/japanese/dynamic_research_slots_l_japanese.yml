@@ -33,3 +33,16 @@
   DR_WAR_RULE_NOTE_OFF:0 "§YNote:§! The War-time Research Power rule is set to §Y\"No change\"§!. As a result, the war / peace effect line in the overview will always show §Y0%§! and has no impact on Research Power."
   DR_LAW_RULE_NOTE_OFF:0 "§YNote:§! The Law-based Research Power Modifiers rule is set to §Y\"Disabled\"§!. The law modifiers listed above are ignored; only factories and experimental facilities contribute to RP."
   DR_ALLIANCE_RULE_NOTE_OFF:0 "§YNote:§! The Alliance Research Power rule is set to §Y\"No bonus\"§!. The alliance bonus line in the overview will always show §Y0%§! and has no impact on Research Power."
+
+  # Slot Stability Timer Game Rule
+  RULE_DR_SLOT_STABILITY:0 "Slot Stability Timer"
+  RULE_DR_SLOT_STABILITY_OFF:0 "Off (Instant)"
+  RULE_DR_SLOT_STABILITY_OFF_DESC:0 "Research slots change immediately when thresholds are crossed. This is the original behaviour."
+  RULE_DR_SLOT_STABILITY_LIGHT:0 "Light (7 days)"
+  RULE_DR_SLOT_STABILITY_LIGHT_DESC:0 "Slots are only removed after staying below the threshold for 7 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_MODERATE:0 "Moderate (14 days)"
+  RULE_DR_SLOT_STABILITY_MODERATE_DESC:0 "Slots are only removed after staying below the threshold for 14 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_RELAXED:0 "Relaxed (30 days)"
+  RULE_DR_SLOT_STABILITY_RELAXED_DESC:0 "Slots are only removed after staying below the threshold for 30 days. Slot gains remain instant."
+  RULE_DR_SLOT_STABILITY_STRICT:0 "Strict (60 days)"
+  RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Slots are only removed after staying below the threshold for 60 days. Slot gains remain instant."

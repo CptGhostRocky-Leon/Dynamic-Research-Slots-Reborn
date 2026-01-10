@@ -23,6 +23,7 @@ dr_apply_research_config = {
 	dr_apply_research_factory_weight_rules = yes
 	dr_apply_easy_slot_rule_overrides = yes
 	dr_apply_easy_slot_cost_rules = yes
+	dr_apply_slot_stability_rules = yes
 
 	# Step 3: allow submods to tweak/extend the config.
 	# Note: Submods can also override this entire file for more extensive changes.
@@ -127,6 +128,9 @@ dr_reset_research_config_defaults = {
 
 	# AI update frequency (days between staggered updates for AI countries)
 	set_variable = { dr_ai_update_frequency = 14 }
+
+	# Slot Stability: Grace period in days before removing slots (default: 30 days)
+	set_variable = { dr_slot_loss_grace_period = 30 }
 }
 
 dr_apply_research_factory_weight_rules = {
@@ -228,6 +232,27 @@ dr_apply_easy_slot_cost_rules = {
 	if = {
 		limit = { has_game_rule = { rule = DR_EASY_COST_RULE option = DR_EASY_COST_100 } }
 		set_variable = { easy_research_slot_coefficient = 1.0 }
+	}
+}
+
+dr_apply_slot_stability_rules = {
+	# Slot Stability Timer: Sets grace period before slot removal based on game rule.
+	# Default (OFF): no grace period, instant slot changes.
+	if = {
+		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_LIGHT } }
+		set_variable = { dr_slot_loss_grace_period = 7 }
+	}
+	if = {
+		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_MODERATE } }
+		set_variable = { dr_slot_loss_grace_period = 14 }
+	}
+	if = {
+		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_RELAXED } }
+		set_variable = { dr_slot_loss_grace_period = 30 }
+	}
+	if = {
+		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_STRICT } }
+		set_variable = { dr_slot_loss_grace_period = 60 }
 	}
 }
 

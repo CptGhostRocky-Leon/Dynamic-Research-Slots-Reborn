@@ -279,6 +279,12 @@ Timers and cooldowns:
 - `dr_ai_update_frequency` – Configuration variable for AI update frequency (default: 14 days, set in `dr_reset_research_config_defaults`).
 - `dr_days_until_alliance_update` – alliance bonus update timer (7 days).
 
+Slot Stability Timer *(since version 1.6)*:
+
+- `dr_slot_loss_grace_period` – Grace period in days before slots are removed (default: 30, configurable via `DR_SLOT_STABILITY_RULE`).
+- `dr_slot_loss_timer` – Current countdown timer (only exists when a slot loss is pending). Decrements daily.
+- `dr_pending_target_slots` – Target slot count that will be applied when `dr_slot_loss_timer` reaches 0.
+
 ---
 
 ## 4. Initialization & thresholds
@@ -646,6 +652,46 @@ Once `total_research_power` is known, the system determines the desired number o
 
 This keeps the script's internal state in sync with the engine.
 
+### 6.1 Slot Stability Timer *(since version 1.6)*
+
+The Slot Stability Timer prevents "flapping" of research slots for nations with fluctuating economies (e.g., trade-focused countries that switch between Free Trade and Closed Economy).
+
+**Key Concept:**
+- **Slot gains are instant** – if your RP increases above a threshold, you immediately get the slot.
+- **Slot losses are delayed** – if your RP drops below a threshold, a timer starts. The slot is only removed after the timer expires.
+- **Timer cancellation** – if your RP recovers above the threshold before the timer expires, the timer is cancelled and you keep the slot.
+
+**Configuration:**
+- `dr_slot_loss_grace_period` – Grace period in days (default: 30, set by `DR_SLOT_STABILITY_RULE` game rule).
+- Options: Off (0), Light (7), Moderate (14), Relaxed (30, default), Strict (60).
+
+**Logic flow:**
+
+1. **Slot GAIN** (`target_research_slots > current_research_slots`):
+   - Cancel any pending slot loss timer (`dr_slot_loss_timer`, `dr_pending_target_slots`)
+   - Apply slot gain immediately via `set_research_slots`
+
+2. **Slot LOSS** (`target_research_slots < current_research_slots`):
+   - If `dr_slot_loss_grace_period > 0` (timer enabled):
+     - If no timer running: Start timer (`dr_slot_loss_timer = dr_slot_loss_grace_period`, `dr_pending_target_slots = target_research_slots`)
+     - If timer running: Update `dr_pending_target_slots` if situation got worse
+     - Do NOT apply slot change yet
+   - If `dr_slot_loss_grace_period = 0` (timer disabled): Apply slot loss immediately
+
+3. **No change** (`target_research_slots == current_research_slots`):
+   - Cancel any pending timer (RP recovered to current level)
+
+**Timer countdown (in `on_daily`):**
+- If `dr_slot_loss_timer` exists, decrement it by 1
+- If `dr_slot_loss_timer <= 0`:
+  - Apply pending slot loss via `set_research_slots = var:dr_pending_target_slots`
+  - Update `current_research_slots`
+  - Clear timer variables
+  - Fire notification event for players
+
+**Helper effect:**
+- `dr_apply_slot_stability_rules` – Applies the game rule setting to `dr_slot_loss_grace_period`. Called from `dr_apply_research_config`.
+
 ---
 
 ## 7. Custom Game Rules (overview)
@@ -661,6 +707,7 @@ Summary of the key rules:
 - `DR_WAR_RP_RULE` – war-time RP penalty (OFF, −5%, −10%, −15%, −20%, −25%, −30%, default: −10%).
 - `DR_ALLIANCE_RP_RULE` – maximum positive RP bonus from alliances (OFF, +5%, +10%, +15%, +20%, +25%, +30%, default: +10%).
 - `DR_LAW_RP_RULE` – whether trade/economy/conscription laws affect RP (ON/OFF, default: ON).
+- `DR_SLOT_STABILITY_RULE` *(since version 1.6)* – grace period before slot removal (Off/Light 7d/Moderate 14d/Relaxed 30d/Strict 60d, default: Relaxed 30d).
 
 Many of these rules have `allow_achievements = no` on extreme settings; check the localisation for the exact behaviour.
 

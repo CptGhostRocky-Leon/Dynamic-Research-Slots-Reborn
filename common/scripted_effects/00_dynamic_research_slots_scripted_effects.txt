@@ -419,7 +419,87 @@ recalculate_dynamic_research_slots = {
 		# Allow disabling slot changes while keeping RP calculation active (for display/debug purposes).
 		if = {
 			limit = { NOT = { has_country_flag = dr_disable_research_slot_changes } }
-			set_research_slots = var:target_research_slots
+
+			# Slot Stability Timer Logic:
+			# - Slot GAINS are immediate (no timer)
+			# - Slot LOSSES use grace period timer (if enabled via game rule)
+
+			# Case 1: Slot GAIN (target > current) - immediate application
+			if = {
+				limit = {
+					check_variable = {
+						var = target_research_slots
+						value = current_research_slots
+						compare = greater_than
+					}
+				}
+				# Cancel any pending slot loss timer (RP recovered)
+				if = {
+					limit = { has_variable = dr_slot_loss_timer }
+					clear_variable = dr_slot_loss_timer
+					clear_variable = dr_pending_target_slots
+				}
+				# Apply slot gain immediately
+				set_research_slots = var:target_research_slots
+			}
+
+			# Case 2: Slot LOSS (target < current)
+			else_if = {
+				limit = {
+					check_variable = {
+						var = target_research_slots
+						value = current_research_slots
+						compare = less_than
+					}
+				}
+
+				# Check if grace period is enabled
+				if = {
+					limit = {
+						check_variable = {
+							var = dr_slot_loss_grace_period
+							value = 0
+							compare = greater_than
+						}
+					}
+
+					# Grace period enabled: start or continue timer
+					if = {
+						limit = { NOT = { has_variable = dr_slot_loss_timer } }
+						# Start new timer
+						set_variable = { dr_slot_loss_timer = dr_slot_loss_grace_period }
+						set_variable = { dr_pending_target_slots = target_research_slots }
+					}
+					else = {
+						# Timer already running - update pending target if it got worse
+						if = {
+							limit = {
+								check_variable = {
+									var = target_research_slots
+									value = dr_pending_target_slots
+									compare = less_than
+								}
+							}
+							set_variable = { dr_pending_target_slots = target_research_slots }
+						}
+					}
+					# Do NOT apply slot change yet - timer handles it
+				}
+				else = {
+					# Grace period disabled (0): Apply slot loss immediately (original behaviour)
+					set_research_slots = var:target_research_slots
+				}
+			}
+
+			# Case 3: No change (target == current)
+			else = {
+				# If timer was running and RP recovered back to current level, cancel it
+				if = {
+					limit = { has_variable = dr_slot_loss_timer }
+					clear_variable = dr_slot_loss_timer
+					clear_variable = dr_pending_target_slots
+				}
+			}
 		}
 		set_variable = { current_research_slots = amount_research_slots }
 	}
