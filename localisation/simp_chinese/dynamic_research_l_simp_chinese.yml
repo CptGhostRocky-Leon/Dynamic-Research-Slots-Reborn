@@ -148,3 +148,10 @@
   
   RULE_DR_LAW_RP_OFF:0 "已禁用"
   RULE_DR_LAW_RP_OFF_DESC:0 "忽略所有来自贸易、经济和征兵法律的研发能力修正。这使得 RP 仅取决于工厂、设施和其他动态研究规则。"
+
+  # Notification Rule
+  RULE_DR_NOTIFICATION:0 "Slot Change Notifications"
+  RULE_DR_NOTIFICATION_ALL:0 "Show all notifications"
+  RULE_DR_NOTIFICATION_ALL_DESC:0 "Start with notifications enabled. You can toggle this setting in-game at any time via decisions."
+  RULE_DR_NOTIFICATION_NONE:0 "Disable notifications"
+  RULE_DR_NOTIFICATION_NONE_DESC:0 "Start with notifications disabled. You can toggle this setting in-game at any time via decisions."

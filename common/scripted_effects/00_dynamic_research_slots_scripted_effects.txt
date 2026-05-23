@@ -17,6 +17,16 @@ initialize_dynamic_research_slots = {
 	# Apply all default configuration values (factory weights, thresholds, Easy Slots, game rules)
 	dr_apply_research_config = yes
 
+	# Initialize notifications starting flag based on game rule
+	if = {
+		limit = {
+			is_ai = no
+			has_game_rule = { rule = DR_NOTIFICATION_RULE option = DR_NOTIFICATION_NONE }
+		}
+		set_country_flag = dr_disable_notifications
+	}
+
+
 	if = {
 		limit = {
 			check_variable = { current_research_slots > target_research_slots }
@@ -362,43 +372,7 @@ recalculate_dynamic_research_slots = {
 			}
 		}
 
-		if = {
-			limit = {
-				check_variable = {
-					var = target_research_slots
-					value = current_research_slots
-					compare = not_equals
-				}
-			}
 
-			# Slots have changed
-
-			# Player: only show the event if no cooldown is running (or it has expired)
-			if = {
-				limit = { is_ai = no }
-
-				if = {
-					limit = {
-						OR = {
-							NOT = { has_variable = dr_player_event_cooldown }
-							check_variable = {
-								var = dr_player_event_cooldown
-								value = 0
-								compare = less_than_or_equals
-							}
-						}
-					}
-					country_event = dynamic_research_slots.1
-					set_variable = { dr_player_event_cooldown = 14 }
-				}
-			}
-
-			# AI: can always fire the event (if used)
-			if = {
-				limit = { is_ai = yes }
-				country_event = dynamic_research_slots.1
-			}
-		}
 
 		set_variable = { max_research_slots = research_for_slot^num }
 		subtract_from_variable = { max_research_slots = 1 }
@@ -441,10 +415,11 @@ recalculate_dynamic_research_slots = {
 				}
 				# Apply slot gain immediately
 				set_research_slots = var:target_research_slots
+				dr_notify_slot_change = yes
 			}
 
 			# Case 2: Slot LOSS (target < current)
-			else_if = {
+			if = {
 				limit = {
 					check_variable = {
 						var = target_research_slots
@@ -488,11 +463,19 @@ recalculate_dynamic_research_slots = {
 				else = {
 					# Grace period disabled (0): Apply slot loss immediately (original behaviour)
 					set_research_slots = var:target_research_slots
+					dr_notify_slot_change = yes
 				}
 			}
 
 			# Case 3: No change (target == current)
-			else = {
+			if = {
+				limit = {
+					check_variable = {
+						var = target_research_slots
+						value = current_research_slots
+						compare = equals
+					}
+				}
 				# If timer was running and RP recovered back to current level, cancel it
 				if = {
 					limit = { has_variable = dr_slot_loss_timer }
@@ -676,5 +659,25 @@ dr_apply_facility_rp_if_present = {
 		set_variable = { rp_per_facility_var = rp_per_facility_value }
 		set_variable = { facility_rp_reduction_factor = reduction_factor_value }
 		dr_calculate_single_facility_rp = yes
+	}
+}
+
+# Helper effect to trigger the slot change notification for the player
+dr_notify_slot_change = {
+	if = {
+		limit = {
+			is_ai = no
+			NOT = { has_country_flag = dr_disable_notifications }
+			OR = {
+				NOT = { has_variable = dr_player_event_cooldown }
+				check_variable = {
+					var = dr_player_event_cooldown
+					value = 0
+					compare = less_than_or_equals
+				}
+			}
+		}
+		country_event = dynamic_research_slots.1
+		set_variable = { dr_player_event_cooldown = 14 }
 	}
 }

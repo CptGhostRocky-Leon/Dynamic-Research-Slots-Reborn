@@ -45,3 +45,12 @@
   RULE_DR_SLOT_STABILITY_RELAXED_DESC:0 "Slots are only removed after staying below the threshold for 30 days. Slot gains remain instant."
   RULE_DR_SLOT_STABILITY_STRICT:0 "Strict (60 days)"
   RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Slots are only removed after staying below the threshold for 60 days. Slot gains remain instant."
+
+  dynamic_research_slots_toggle_notifications:0 "[GetDRToggleNotificationsText]"
+  dynamic_research_slots_toggle_notifications_desc:0 "Toggle popup notifications when research slots change."
+  dynamic_research_slots_enable_notifications:0 "Enable Research Slot Notifications"
+  dynamic_research_slots_disable_notifications:0 "Disable Research Slot Notifications"
+
+  dynamic_research_slots.7.title:0 "Mid-Game Mod Activation"
+  dynamic_research_slots.7.desc:0 "Dynamic Research Slots Reborn has been activated on an ongoing game. To prevent issues, all countries have been initialized with their default slots and baseline research power."
+  dynamic_research_slots.7.a:0 "Understood"

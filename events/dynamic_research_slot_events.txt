@@ -81,3 +81,17 @@ country_event = {
     name = dynamic_research_startup_option
   }
 }
+
+# Mid-game activation warning event
+country_event = {
+  id = dynamic_research_slots.7
+  hidden = no
+  is_triggered_only = yes
+
+  title = dynamic_research_slots.7.title
+  desc = dynamic_research_slots.7.desc
+
+  option = {
+    name = dynamic_research_slots.7.a
+  }
+}

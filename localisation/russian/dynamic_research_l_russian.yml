@@ -148,3 +148,10 @@
   
   RULE_DR_LAW_RP_OFF:0 "Отключено"
   RULE_DR_LAW_RP_OFF_DESC:0 "Игнорировать все модификаторы исследовательской мощности от торговых, экономических и законов о призыве. В этом случае ИМ зависит только от фабрик, военного времени и альянсов."
+
+  # Notification Rule
+  RULE_DR_NOTIFICATION:0 "Slot Change Notifications"
+  RULE_DR_NOTIFICATION_ALL:0 "Show all notifications"
+  RULE_DR_NOTIFICATION_ALL_DESC:0 "Start with notifications enabled. You can toggle this setting in-game at any time via decisions."
+  RULE_DR_NOTIFICATION_NONE:0 "Disable notifications"
+  RULE_DR_NOTIFICATION_NONE_DESC:0 "Start with notifications disabled. You can toggle this setting in-game at any time via decisions."

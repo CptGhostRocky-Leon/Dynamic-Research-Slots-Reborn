@@ -54,4 +54,23 @@ dynamic_research_slots_decisions = {
 			country_event = dynamic_research_slots.4
 		}
 	}
+
+	dynamic_research_slots_toggle_notifications = {
+		visible = {
+			is_ai = no
+		}
+		available = {
+			always = yes
+		}
+		ai_will_do = { factor = 0 }
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = dr_disable_notifications }
+				clr_country_flag = dr_disable_notifications
+			}
+			else = {
+				set_country_flag = dr_disable_notifications
+			}
+		}
+	}
 }

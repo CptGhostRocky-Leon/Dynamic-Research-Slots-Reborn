@@ -306,3 +306,23 @@ DR_SLOT_STABILITY_RULE = {
 		allow_achievements = yes
 	}
 }
+
+DR_NOTIFICATION_RULE = {
+	name = "RULE_DR_NOTIFICATION"
+	group = "RULE_GROUP_DYNAMIC_RESEARCH"
+
+	# Default: show all slot changes
+	default = {
+		name = DR_NOTIFICATION_ALL
+		text = "RULE_DR_NOTIFICATION_ALL"
+		desc = "RULE_DR_NOTIFICATION_ALL_DESC"
+	}
+
+	# Option: disable all notification popups
+	option = {
+		name = DR_NOTIFICATION_NONE
+		text = "RULE_DR_NOTIFICATION_NONE"
+		desc = "RULE_DR_NOTIFICATION_NONE_DESC"
+		allow_achievements = yes
+	}
+}

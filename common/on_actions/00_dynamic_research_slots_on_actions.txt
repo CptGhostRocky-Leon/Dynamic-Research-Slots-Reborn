@@ -60,6 +60,22 @@ on_actions = {
       # If a country is created later in the game, initialize it once.
       if = {
         limit = { NOT = { has_country_flag = dynamic_research_slots_initialized } }
+
+        # Mid-game activation warning: check if date is past start period
+        # and the global flag is NOT yet set (meaning the mod is being added to an existing save game)
+        if = {
+          limit = {
+            is_ai = no
+            NOT = { has_global_flag = dynamic_research_slots_active }
+            date > 1936.01.05
+            OR = {
+              date < 1939.01.01
+              date > 1939.01.05
+            }
+          }
+          country_event = dynamic_research_slots.7
+        }
+
         initialize_dynamic_research_slots = yes
         calculate_modifiers_to_rp = yes
         recalculate_dynamic_research_slots = yes
@@ -91,11 +107,7 @@ on_actions = {
           clear_variable = dr_slot_loss_timer
           clear_variable = dr_pending_target_slots
           # Notify player about slot loss
-          if = {
-            limit = { is_ai = no }
-            country_event = dynamic_research_slots.1
-            set_variable = { dr_player_event_cooldown = 14 }
-          }
+          dr_notify_slot_change = yes
         }
       }
 

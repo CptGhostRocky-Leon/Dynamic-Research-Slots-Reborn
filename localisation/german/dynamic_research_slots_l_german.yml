@@ -47,3 +47,11 @@
   RULE_DR_SLOT_STABILITY_STRICT:0 "Streng (60 Tage)"
   RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Slots werden erst entfernt, nachdem man 60 Tage unter dem Schwellenwert liegt. Slot-Gewinne bleiben sofort."
 
+  dynamic_research_slots_toggle_notifications:0 "[GetDRToggleNotificationsText]"
+  dynamic_research_slots_toggle_notifications_desc:0 "Schalte Pop-up-Benachrichtigungen bei Änderungen der Forschungsslots um."
+  dynamic_research_slots_enable_notifications:0 "Forschungsslot-Benachrichtigungen aktivieren"
+  dynamic_research_slots_disable_notifications:0 "Forschungsslot-Benachrichtigungen deaktivieren"
+
+  dynamic_research_slots.7.title:0 "Mod-Aktivierung im laufenden Spiel"
+  dynamic_research_slots.7.desc:0 "Dynamic Research Slots Reborn wurde in einem laufenden Spiel aktiviert. Um Probleme zu vermeiden, wurden alle Länder mit ihren Standard-Slots und ihrer Basis-Forschungskraft initialisiert."
+  dynamic_research_slots.7.a:0 "Verstanden"

@@ -148,3 +148,11 @@
 
   RULE_DR_LAW_RP_OFF:0 "Deaktiviert"
   RULE_DR_LAW_RP_OFF_DESC:0 "Ignoriert alle Research-Power-Modifikatoren aus Handels-, Wirtschafts- und Wehrpflichtgesetzen. Dadurch hängen RP nur von Fabriken, Einrichtungen und anderen Dynamic-Research-Regeln ab."
+
+  # Benachrichtigungsregel
+  RULE_DR_NOTIFICATION:0 "Forschungsslot-Änderungsbenachrichtigungen"
+  RULE_DR_NOTIFICATION_ALL:0 "Alle Benachrichtigungen anzeigen"
+  RULE_DR_NOTIFICATION_ALL_DESC:0 "Benachrichtigungen standardmäßig aktivieren. Du kannst diese Einstellung im laufenden Spiel jederzeit über Entscheidungen ändern."
+  RULE_DR_NOTIFICATION_NONE:0 "Benachrichtigungen deaktivieren"
+  RULE_DR_NOTIFICATION_NONE_DESC:0 "Benachrichtigungen standardmäßig deaktivieren. Du kannst diese Einstellung im laufenden Spiel jederzeit über Entscheidungen ändern."
+
