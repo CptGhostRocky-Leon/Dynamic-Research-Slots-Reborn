@@ -1,8 +1,11 @@
+# =========================================================================
+# DYNAMIC RESEARCH SLOTS - ON ACTIONS
+# =========================================================================
+
 on_actions = {
-  ###
-  # Initialization at game start.
-  # Set variables/flags but do not change slots yet.
-  ###
+  # =========================================================================
+  # Initialization on Game Start
+  # =========================================================================
   on_startup = {
     effect = {
       every_country = {
@@ -40,11 +43,9 @@ on_actions = {
     }
   }
 
-  ###
-  # Daily update.
-  # - Player: recalculate every day, with event cooldown.
-  # - AI: roughly every 14 days by default, staggered across countries.
-  ###
+  # =========================================================================
+  # Daily Updates (Player & AI Recalculation)
+  # =========================================================================
   on_daily = {
     effect = {
       # Track war duration for dynamic war-time RP penalties.
@@ -121,10 +122,9 @@ on_actions = {
     }
   }
 
-  ###
-  # State Control Change
-  # Immediate recalculation when territory changes hands.
-  ###
+  # =========================================================================
+  # Recalculation on Territory Control Changes
+  # =========================================================================
   on_state_control_changed = {
     effect = {
       # If the new controller is initialized, recalculate immediately

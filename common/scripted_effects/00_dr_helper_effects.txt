@@ -1,0 +1,87 @@
+# =========================================================================
+# DYNAMIC RESEARCH SLOTS - INTERNAL HELPER EFFECTS
+# =========================================================================
+
+# =========================================================================
+# Single Facility RP Calculation
+# =========================================================================
+# Expects: facility_rp_count, rp_per_facility_var, facility_rp_reduction_factor
+# Sets: temp_facility_rp and adds it to total_research_power and facility_research_power
+dr_calculate_single_facility_rp = {
+	set_variable = { temp_facility_rp = facility_rp_count }
+	multiply_variable = { temp_facility_rp = rp_per_facility_var }
+	set_variable = { facility_rp_multiplier = 1 }
+	if = {
+		limit = {
+			check_variable = {
+				var = facility_rp_count
+				value = 1
+				compare = greater_than
+			}
+		}
+		set_variable = { facility_rp_discount = facility_rp_count }
+		subtract_from_variable = { facility_rp_discount = 1 }
+		multiply_variable = { facility_rp_discount = facility_rp_reduction_factor }
+		divide_variable = { facility_rp_discount = 2 }
+		subtract_from_variable = { facility_rp_multiplier = facility_rp_discount }
+		if = {
+			limit = {
+				check_variable = {
+					var = facility_rp_multiplier
+					value = 0
+					compare = less_than
+				}
+			}
+			set_variable = { facility_rp_multiplier = 0 }
+		}
+	}
+	multiply_variable = { temp_facility_rp = facility_rp_multiplier }
+	dr_apply_experimental_facility_rp_scaling = yes
+	add_to_variable = { total_research_power = temp_facility_rp }
+	add_to_variable = { facility_research_power = temp_facility_rp }
+}
+
+# =========================================================================
+# Conditional Facility RP Application
+# =========================================================================
+# Expects: facility_count_var (variable containing the count)
+#          rp_per_facility_value (variable or literal value)
+#          reduction_factor_value (variable or literal value)
+dr_apply_facility_rp_if_present = {
+	if = {
+		limit = {
+			check_variable = {
+				var = facility_count_var
+				value = 0
+				compare = greater_than
+			}
+		}
+		set_variable = { facility_rp_count = facility_count_var }
+		set_variable = { rp_per_facility_var = rp_per_facility_value }
+		set_variable = { facility_rp_reduction_factor = reduction_factor_value }
+		dr_calculate_single_facility_rp = yes
+	}
+}
+
+# =========================================================================
+# Slot Change Notification Trigger
+# =========================================================================
+# Helper effect to trigger the slot change notification for the player
+dr_notify_slot_change = {
+	if = {
+		limit = {
+			is_ai = no
+			NOT = { has_country_flag = dr_disable_notifications }
+			OR = {
+				NOT = { has_variable = dr_player_event_cooldown }
+				check_variable = {
+					var = dr_player_event_cooldown
+					value = 0
+					compare = less_than_or_equals
+				}
+			}
+		}
+		country_event = dynamic_research_slots.1
+		set_variable = { dr_player_event_cooldown = 14 }
+	}
+}

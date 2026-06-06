@@ -1,6 +1,7 @@
-# Dynamic Research Slots - Configuration
-#
-# This file contains all *default* configuration for the Dynamic Research Slots system:
+# =========================================================================
+# DYNAMIC RESEARCH SLOTS - CONFIGURATION
+# =========================================================================
+# Default configuration for the Dynamic Research Slots system:
 # - Base RP weights per factory type
 # - Base thresholds for research slots
 # - Default Easy Slot settings
@@ -15,6 +16,9 @@
 # - Make sure your mod is loaded *after* "Dynamic Research Slots Reborn".
 #
 
+# =========================================================================
+# Configuration Entry Point
+# =========================================================================
 dr_apply_research_config = {
 	# Step 1: apply all default values (base weights, arrays, Easy Slots).
 	dr_reset_research_config_defaults = yes
@@ -30,6 +34,9 @@ dr_apply_research_config = {
 	dr_apply_research_config_submods = yes
 }
 
+# =========================================================================
+# RP Threshold Rebuilder
+# =========================================================================
 # Rebuild effective RP thresholds for research slots based on
 # base_research_for_slot[], easy_research_slots and easy_research_slot_coefficient.
 dr_rebuild_research_thresholds = {
@@ -55,6 +62,9 @@ dr_rebuild_research_thresholds = {
 	}
 }
 
+# =========================================================================
+# Base Configuration Defaults
+# =========================================================================
 dr_reset_research_config_defaults = {
 	# Base RP weights per factory type
 	set_variable = { research_power_per_civ = 3 }
@@ -133,6 +143,9 @@ dr_reset_research_config_defaults = {
 	set_variable = { dr_slot_loss_grace_period = 30 }
 }
 
+# =========================================================================
+# Factory Weight Game Rule Overrides
+# =========================================================================
 dr_apply_research_factory_weight_rules = {
 	# Optional override via factory weights game rule
 	if = {
@@ -155,6 +168,9 @@ dr_apply_research_factory_weight_rules = {
 	}
 }
 
+# =========================================================================
+# Easy Slot Game Rule Overrides
+# =========================================================================
 dr_apply_easy_slot_rule_overrides = {
 	# Additional Easy Slots via game rule
 	if = {
@@ -191,6 +207,9 @@ dr_apply_easy_slot_rule_overrides = {
 	}
 }
 
+# =========================================================================
+# Easy Slot Cost Game Rule Overrides
+# =========================================================================
 dr_apply_easy_slot_cost_rules = {
 	# Cost factor of Easy Slots via game rule (default 60%)
 	if = {
@@ -235,9 +254,15 @@ dr_apply_easy_slot_cost_rules = {
 	}
 }
 
+# =========================================================================
+# Slot Stability Game Rule Overrides
+# =========================================================================
 dr_apply_slot_stability_rules = {
 	# Slot Stability Timer: Sets grace period before slot removal based on game rule.
-	# Default (OFF): no grace period, instant slot changes.
+	if = {
+		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_OFF } }
+		set_variable = { dr_slot_loss_grace_period = 0 }
+	}
 	if = {
 		limit = { has_game_rule = { rule = DR_SLOT_STABILITY_RULE option = DR_SLOT_STABILITY_LIGHT } }
 		set_variable = { dr_slot_loss_grace_period = 7 }
@@ -256,12 +281,5 @@ dr_apply_slot_stability_rules = {
 	}
 }
 
-dr_apply_research_config_submods = {
-	# Intentionally left blank. Submods can override this scripted effect to
-	# adjust or extend the configuration after the base logic has executed.
-	#
-	# For extensive changes, submods can also override this entire file:
-	# - Copy 00_dr_dynamic_research_config.txt to your submod
-	# - Adjust values as needed
-	# - Make sure your submod loads after "Dynamic Research Slots Reborn"
-}
+# Note: The dr_apply_research_config_submods hook is defined in 00_dr_submod_hooks.txt
+# Submods can override it there, or override this entire config file for extensive changes.

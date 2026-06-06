@@ -1,0 +1,62 @@
+# =========================================================================
+# In-Game Console Shortcuts
+# =========================================================================
+
+# Shortcut for print summary tooltip
+# In-game console command: effect dr_s
+dr_s = {
+	if = {
+		limit = {
+			owner = { exists = yes }
+		}
+		owner = {
+			dr_print_slots_summary_internal = yes
+		}
+	}
+	else = {
+		dr_print_slots_summary_internal = yes
+	}
+}
+
+# =========================================================================
+# Console Tooltip Implementation
+# =========================================================================
+
+# Custom debug helper to print a quick slots summary directly onto the in-game console screen.
+# In-game console command: effect dr_print_slots_summary = yes
+dr_print_slots_summary = {
+	if = {
+		limit = {
+			owner = { exists = yes }
+		}
+		owner = {
+			dr_print_slots_summary_internal = yes
+		}
+	}
+	else = {
+		dr_print_slots_summary_internal = yes
+	}
+}
+
+# Internal implementation that expects to run in country scope
+dr_print_slots_summary_internal = {
+	# Keep current_research_slots variable in sync with the actual engine state
+	set_variable = { current_research_slots = amount_research_slots }
+
+	# Since index 0 is a dummy, max slots is array size - 1
+	set_variable = { temp_size = research_for_slot^num }
+	subtract_from_variable = { temp_size = 1 }
+
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_country_flag = dynamic_research_slots_initialized }
+				NOT = { check_variable = { var = temp_size value = 1 compare = greater_than_or_equals } }
+			}
+		}
+		custom_effect_tooltip = dr_print_slots_summary_error_tooltip
+	}
+	else = {
+		custom_effect_tooltip = dr_print_slots_summary_tooltip
+	}
+}

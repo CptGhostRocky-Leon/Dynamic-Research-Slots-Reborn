@@ -1,0 +1,34 @@
+# Submod hook: compatibility check - allows other mods to signal compatibility or perform checks before config is applied
+dr_check_compatibility_submods = { }
+
+# Submod hook: initialize custom variables or perform setup tasks during initialization (after config is applied)
+dr_initialize_submods = { }
+
+# Submod hook: adjust facility counters after vanilla counting pass
+dr_collect_facility_counts_submods = { }
+
+# Submod hook: convert facility counters into RP, or add additional RP sources
+dr_apply_facility_rp_submods = { }
+
+# Submod hook: adjust the per-facility RP after the base RP and built-in reduction logic are applied.
+# Override this effect to tweak `temp_facility_rp` using the helper variables (facility_rp_count, facility_rp_reduction_factor, facility_rp_multiplier, etc.).
+dr_apply_experimental_facility_rp_scaling = { }
+
+# Submod hook: set factory modifiers (civilian_rp_modifier, military_rp_modifier, naval_rp_modifier)
+# before the factory RP calculation runs. These modifiers are applied multiplicatively.
+dr_apply_factory_modifiers_submods = { }
+
+# Submod hook: adjust research slot thresholds after Easy Slot logic has been applied.
+# This allows tweaking thresholds based on custom logic without overriding the entire threshold array.
+dr_adjust_research_thresholds_submods = { }
+
+# Submod hook: tweak total RP after the vanilla global modifier is applied
+dr_total_rp_modifier_submods = { }
+
+# Submod hook: override opinion factor calculation for alliance members
+# If this hook sets alliance_rel_factor and sets the dr_opinion_factor_custom_set flag,
+# the default calculation is skipped. This allows submods to explicitly set 0.0 if needed.
+# Example:
+#   set_variable = { alliance_rel_factor = 0.5 }
+#   set_country_flag = dr_opinion_factor_custom_set
+dr_get_opinion_factor_for_ally_submods = { }

@@ -1,3 +1,10 @@
+# =========================================================================
+# DYNAMIC RESEARCH SLOTS - GAME RULES
+# =========================================================================
+
+# =========================================================================
+# Easy Slots Settings
+# =========================================================================
 DR_EASY_SLOTS_RULE = {
 	name = "RULE_DR_EASY_SLOTS"
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
@@ -112,6 +119,9 @@ DR_MINOR_EASY_SLOTS_RULE = {
 	}
 }
 
+# =========================================================================
+# Factory Weight Settings
+# =========================================================================
 DR_FACTORY_WEIGHTS_RULE = {
 	name = "RULE_DR_FACTORY_WEIGHTS"
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
@@ -139,6 +149,9 @@ DR_FACTORY_WEIGHTS_RULE = {
 	}
 }
 
+# =========================================================================
+# Research Power Modifiers Settings (War, Alliance, Laws)
+# =========================================================================
 DR_WAR_RP_RULE = {
 	name = "RULE_DR_WAR_RP"
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
@@ -262,6 +275,9 @@ DR_LAW_RP_RULE = {
 	}
 }
 
+# =========================================================================
+# Slot Stability Grace Period Settings
+# =========================================================================
 DR_SLOT_STABILITY_RULE = {
 	name = "RULE_DR_SLOT_STABILITY"
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"
@@ -307,6 +323,9 @@ DR_SLOT_STABILITY_RULE = {
 	}
 }
 
+# =========================================================================
+# Notifications Settings
+# =========================================================================
 DR_NOTIFICATION_RULE = {
 	name = "RULE_DR_NOTIFICATION"
 	group = "RULE_GROUP_DYNAMIC_RESEARCH"

@@ -1,16 +1,12 @@
-# Dynamic Research: RP modifier logic (war, peace, laws, alliances)
-#
-# High-level structure:
-# - dr_apply_rp_modifier_logic: main entry point, resets the aggregate modifier
-#   and calls the three helper effects below.
-# - dr_apply_war_rp_logic: builds a war/peace modifier based on wars, war
-#   length, stability and ruling party support and stores it in
-#   total_rp_modifier.
-# - dr_apply_law_rp_logic: adds law-based RP modifiers (trade/economy/
-#   conscription) into total_rp_modifier.
-# - dr_apply_alliance_rp_logic: computes the alliance RP bonus, respecting
-#   the game rule cap, and adds it to total_rp_modifier.
+# =========================================================================
+# DYNAMIC RESEARCH SLOTS - RP MODIFIERS CALCULATIONS
+# =========================================================================
+# RP modifier logic (war, peace, laws, alliances)
 
+# =========================================================================
+# Main Entry Point
+# =========================================================================
+# Resets the aggregate modifier and calls the helper effects below.
 dr_apply_rp_modifier_logic = {
 	# Reset aggregated modifier before recomputing
 	set_variable = { total_rp_modifier = 0 }
@@ -21,6 +17,9 @@ dr_apply_rp_modifier_logic = {
 	dr_apply_alliance_rp_logic = yes
 }
 
+# =========================================================================
+# War Penalty Factors
+# =========================================================================
 # Calculate war penalty factors (war support, stability, ruling party)
 # Sets: war_penalty_factor_ws, war_penalty_factor_stab, war_penalty_factor_party
 dr_calculate_war_penalty_factors = {
@@ -51,6 +50,9 @@ dr_calculate_war_penalty_factors = {
 	set_variable = { war_penalty_factor_party = government_support_factor }
 }
 
+# =========================================================================
+# Government Popularity Helper
+# =========================================================================
 # Helper effect: Set temp_government_popularity based on current government type
 # Sets: temp_government_popularity (democratic, fascism, communism, or neutrality)
 dr_set_government_popularity = {
@@ -72,6 +74,9 @@ dr_set_government_popularity = {
 	}
 }
 
+# =========================================================================
+# Government Support Factor Helper
+# =========================================================================
 # Helper effect: Calculate government support factor based on popularity
 # Expects: temp_government_popularity (variable containing popularity value, e.g., democratic, fascism, communism, neutrality)
 # Sets: government_support_factor (0.0, 0.1, 0.2, 0.3, or 0.4) based on config thresholds
@@ -158,6 +163,9 @@ dr_get_government_support_factor = {
 	# Below very_low threshold remains 0.4 (worst, default)
 }
 
+# =========================================================================
+# Government Support to Peace Bonus Mapper
+# =========================================================================
 # Helper effect: Map government_support_factor to peace bonus
 # Expects: government_support_factor (0.0, 0.1, 0.2, 0.3, or 0.4)
 # Modifies: peace_rp_bonus (adds 0.03 for 0.0, 0.02 for 0.1, 0.0 for 0.2+)
@@ -172,6 +180,9 @@ dr_map_government_support_to_peace_bonus = {
 	}
 }
 
+# =========================================================================
+# War Phase Factor Calculation
+# =========================================================================
 # Calculate war phase factor based on war duration and type
 # Sets: war_phase_factor, war_defense_factor
 dr_calculate_war_phase_factor = {
@@ -265,6 +276,9 @@ dr_calculate_war_phase_factor = {
 	}
 }
 
+# =========================================================================
+# Peace Bonus Calculation
+# =========================================================================
 # Calculate peacetime bonus based on stability and ruling party support
 # Sets: peace_rp_bonus
 dr_calculate_peace_bonus = {
@@ -305,6 +319,9 @@ dr_calculate_peace_bonus = {
 	}
 }
 
+# =========================================================================
+# War RP Penalty Core Logic
+# =========================================================================
 dr_apply_war_rp_logic = {
 	# War-time RP modifier (global, applied to total RP)
 	set_variable = { war_rp_base_penalty = 0 }
@@ -365,6 +382,9 @@ dr_apply_war_rp_logic = {
 	dr_calculate_peace_bonus = yes
 }
 
+# =========================================================================
+# Law RP Modifiers Core Logic
+# =========================================================================
 dr_apply_law_rp_logic = {
 	# Law-based RP effects (trade / economy / conscription)
 	# Can be toggled via DR_LAW_RP_RULE (default: ON).
@@ -423,6 +443,9 @@ dr_apply_law_rp_logic = {
 	}
 }
 
+# =========================================================================
+# Ally Opinion Factor Helper (Ally -> US)
+# =========================================================================
 # Helper effect: Calculate opinion factor for an ally (0.0 to 1.0 in 0.1 steps)
 # Uses reverse checking (from highest to lowest) for better average performance
 # Sets: alliance_rel_factor
@@ -500,6 +523,9 @@ dr_get_opinion_factor_for_ally = {
 	# 0-7 remains 0.0 (default)
 }
 
+# =========================================================================
+# Root Opinion Factor Helper (US -> Ally)
+# =========================================================================
 # Helper effect: Calculate opinion factor FROM ROOT to PREV (Ally)
 # Checks ROOT's opinion of the Ally (PREV).
 # Sets: alliance_rel_factor
@@ -576,14 +602,9 @@ dr_get_opinion_factor_from_root = {
 	}
 }
 
-# Submod hook: override opinion factor calculation for alliance members
-# If this hook sets alliance_rel_factor and sets the dr_opinion_factor_custom_set flag,
-# the default calculation is skipped. This allows submods to explicitly set 0.0 if needed.
-# Example:
-#   set_variable = { alliance_rel_factor = 0.5 }
-#   set_country_flag = dr_opinion_factor_custom_set
-dr_get_opinion_factor_for_ally_submods = { }
-
+# =========================================================================
+# Alliance RP Modifiers Core Logic
+# =========================================================================
 dr_apply_alliance_rp_logic = {
 	# Alliance / faction RP modifier
 	# 5% per ally, scaled by relations and capped by game rule.

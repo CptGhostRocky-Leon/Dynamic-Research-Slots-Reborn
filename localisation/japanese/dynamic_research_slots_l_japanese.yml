@@ -1,6 +1,6 @@
-﻿l_japanese
+﻿l_japanese:
   dynamic_research_slots_decisions:0 "Dynamic Research Slots"
-  dynamic_research_slots_decisions_desc:0 "§POur factories generate Research Power (RP).§! When RP reaches certain thresholds, we unlock more research slots - but we can also lose slots if our RP drops too low.\n\n§YTotal RP: [?total_research_power]§!\n§YNext slot at: [?next_research_slot_at]§!\n\n§GRP from civilian factories:§! [?civilian_research_power]\n§RRP from military factories:§! [?military_research_power]\n§CRP from naval dockyards:§! [?naval_research_power]\n§ORP from experimental facilities:§! [?facility_research_power]\n\n§YRP modifiers: [?total_rp_modifier|%+]§!\n§YWar / peace effect: [?war_rp_penalty_effective|%+]§!\n§YAlliance bonus: [?alliance_bonus_pct|%+]§!\n\nUse the \"HELP\" decision for more detailed information."
+  dynamic_research_slots_decisions_desc:0 "§POur factories generate Research Power (RP).§! When RP reaches certain thresholds, we unlock more research slots - but we can also lose slots if our RP drops too low.\n\n§YTotal RP: [?total_research_power]§!\n[GetDRCurrentSlotsInfo]\n[GetDRNextSlotInfo]\n[GetDRSlotLossInfo]\n\n§GRP from civilian factories:§! [?civilian_research_power]\n§RRP from military factories:§! [?military_research_power]\n§CRP from naval dockyards:§! [?naval_research_power]\n§ORP from experimental facilities:§! [?facility_research_power]\n\n§YRP modifiers: [?total_rp_modifier|%+]§!\n§YWar / peace effect: [?war_rp_penalty_effective|%+]§!\n§YAlliance bonus: [?alliance_bonus_pct|%+]§!\n\nUse the \"HELP\" decision for more detailed information."
   
   dynamic_research_slots_help:0 "HELP"
   dynamic_research_slots.help.title:0 "Dynamic Research Slots Help"
@@ -55,3 +55,13 @@
   dynamic_research_slots.7.title:0 "Mid-Game Mod Activation"
   dynamic_research_slots.7.desc:0 "Dynamic Research Slots Reborn has been activated on an ongoing game. To prevent issues, all countries have been initialized with their default slots and baseline research power."
   dynamic_research_slots.7.a:0 "Understood"
+
+  dr_print_slots_summary_tooltip:0 "§H--- DYNAMIC RESEARCH SLOTS SYSTEM DETAILS ---§!\nTotal configured research slots: §Y[?temp_size]§!\nCurrent country target slots: §G[?target_research_slots]§!\nCurrent country active slots: §B[?current_research_slots]§!\nCurrent country research power: §O[?total_research_power]§!\n§H---------------------------------------------§!"
+  dr_print_slots_summary_error_tooltip:0 "§H--- DYNAMIC RESEARCH SLOTS SYSTEM DETAILS ---§!\n§R[ERROR] The system has not been fully initialized yet.§!\nPlease let the game run for at least one day before using this command.\n§H---------------------------------------------§!"
+
+  GetDRCurrentSlotsInfo_key:0 "Current numbers of Slots: §G[?target_research_slots]§! (§Y[?current_research_slot_at|0]§! RP)"
+  GetDRNextSlotInfo_max_key:0 "Next slot: §GMax slots reached§!"
+  GetDRNextSlotInfo_key:0 "Next slot at §Y[?next_research_slot_at|0]§! RP - missing (§R[?dr_missing_rp|2]§! RP)"
+  GetDRSlotLossInfo_min_key:0 "Slot loss: §RCannot drop below 2 slots§!"
+  GetDRSlotLossInfo_key:0 "Slot loss below: §R[?current_research_slot_at|0]§! RP"
+
