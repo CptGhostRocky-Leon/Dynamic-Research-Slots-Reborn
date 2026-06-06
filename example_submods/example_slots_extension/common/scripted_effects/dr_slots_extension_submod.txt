@@ -1,0 +1,26 @@
+# Dynamic Research Slots Reborn - Submod Example: Slots Extension
+#
+# This file demonstrates how to extend the base mod to support 11 and 12 research slots.
+# To use this in a submod:
+# 1. Place this file inside your submod's 'common/scripted_effects/' directory.
+# 2. Make sure your submod descriptor is configured to load after the main mod.
+
+dr_apply_research_config_submods = {
+	# Check if we already appended slot 11 to prevent duplicate entries if re-initialized.
+	# (Since variables persist in save games, checking index 11 prevents array duplication).
+	if = {
+		limit = {
+			NOT = { has_variable = base_research_for_slot^11 }
+		}
+
+		# --- Add Slot 11 ---
+		# Threshold: 4500 RP
+		add_to_array = { base_research_for_slot = 4500 }
+		add_to_array = { research_for_slot = 4500 }
+
+		# --- Add Slot 12 ---
+		# Threshold: 6000 RP
+		add_to_array = { base_research_for_slot = 6000 }
+		add_to_array = { research_for_slot = 6000 }
+}
+
