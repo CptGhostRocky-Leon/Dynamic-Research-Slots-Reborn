@@ -36,13 +36,13 @@
 
   # Slot Stability Timer Game Rule
   RULE_DR_SLOT_STABILITY:0 "Таймер стабильности ячеек"
-  RULE_DR_SLOT_STABILITY_OFF:0 "Отключено  (Мгновенно)"
+  RULE_DR_SLOT_STABILITY_OFF:0 "Отключено (Мгновенно)"
   RULE_DR_SLOT_STABILITY_OFF_DESC:0 "Ячейки исследований изменяются мгновенно при пересечении порогов. Оригинальное поведение."
-  RULE_DR_SLOT_STABILITY_LIGHT:0 "Лёгкий  (7 дней)"
+  RULE_DR_SLOT_STABILITY_LIGHT:0 "Лёгкий (7 дней)"
   RULE_DR_SLOT_STABILITY_LIGHT_DESC:0 "Ячейки удаляются только после 7 дней нахождения ниже порога. Получение ячеек по-прежнему мгновенное."
-  RULE_DR_SLOT_STABILITY_MODERATE:0 "Умеренный  (14 дней)"
+  RULE_DR_SLOT_STABILITY_MODERATE:0 "Умеренный (14 дней)"
   RULE_DR_SLOT_STABILITY_MODERATE_DESC:0 "Ячейки удаляются только после 14 дней нахождения ниже порога. Получение ячеек по-прежнему мгновенное."
-  RULE_DR_SLOT_STABILITY_RELAXED:0 "Высокий  (30 дней)"
+  RULE_DR_SLOT_STABILITY_RELAXED:0 "Высокий (30 дней)"
   RULE_DR_SLOT_STABILITY_RELAXED_DESC:0 "Ячейки удаляются только после 30 дней нахождения ниже порога. Получение ячеек по-прежнему мгновенное."
   RULE_DR_SLOT_STABILITY_STRICT:0 "Максимальный (60 дней)"
   RULE_DR_SLOT_STABILITY_STRICT_DESC:0 "Ячейки удаляются только после 60 дней нахождения ниже порога. Получение ячеек по-прежнему мгновенное."
